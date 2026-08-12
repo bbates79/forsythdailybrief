@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-12T04:52:24.783140+00:00",
+  "updated_at": "2026-08-12T05:03:43.256152+00:00",
   "lead": {
     "title": "Zoning Board of Appeals Regular Meeting/Public Hearings",
     "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
@@ -8,7 +8,7 @@
   "facts": {
     "meetings": "20 government and meeting updates are currently published.",
     "schools": "School-specific adapters are planned next; district links remain in the source inventory.",
-    "sources": "5 source categories are represented in the current brief."
+    "sources": "2 source categories are represented in the current brief."
   },
   "items": [
     {
@@ -140,22 +140,6 @@
       "calendar_link": "https://www.forsythco.com/juicebox-meetings/ical-export?meeting_id=18827"
     },
     {
-      "id": "dcc3d692f60dfd0b",
-      "title": "Civil Service Board – Regular Meeting 10:00 AM",
-      "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
-      "source": "Forsyth County Meetings",
-      "source_type": "official",
-      "category": "government",
-      "date": "2026-08-13",
-      "link": "https://www.forsythco.com/meetings/civil-service-board-regular-meeting-1000-am-4",
-      "approval_status": "approved",
-      "event_date": "2026-08-13",
-      "event_time": "10:00 AM",
-      "event_location": "Forsyth County Juvenile Court Building",
-      "event_type": "Regular Meeting",
-      "calendar_link": "https://www.forsythco.com/juicebox-meetings/ical-export?meeting_id=3860"
-    },
-    {
       "id": "b88936ae84b7bdbd",
       "title": "Civil Service Board – Regular Meeting 10:00 AM",
       "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
@@ -172,81 +156,20 @@
       "calendar_link": "https://www.forsythco.com/juicebox-meetings/ical-export?meeting_id=3870"
     },
     {
-      "id": "84fd301f7740a763",
-      "title": "Volleyball: Longhorns, Broncos pick up wins in tri-match",
-      "summary": "A tri-match at East Forsyth saw Lambert and the host Broncos finish 1-1.",
-      "source": "Forsyth County News",
-      "source_type": "local-reporting",
-      "category": "schools",
-      "date": "2026-08-12",
-      "link": "https://www.forsythnews.com/sports/volleyball/volleyball-longhorns-broncos-pick-up-wins-in-tri-match",
-      "approval_status": "approved"
-    },
-    {
-      "id": "9cb91785a5348b21",
-      "title": "These two former UGA football greats will headline the 7th annual Fan Fest in Forsyth County",
-      "summary": "Organizers say this year’s Fan Fest will be bigger than ever.",
-      "source": "Forsyth County News",
-      "source_type": "local-reporting",
-      "category": "local-news",
-      "date": "2026-08-12",
-      "link": "https://www.forsythnews.com/life/events/these-two-former-uga-football-greats-will-headline-the-7th-annual-fan-fest-in-forsyth-county",
-      "approval_status": "approved"
-    },
-    {
-      "id": "86956f24016b93ee",
-      "title": "Softball: Forsyth Central unable to hang with Peachtree Ridge",
-      "summary": "Forsyth Central couldn't overcome the injury bug during a non-region loss to Peachtree Ridge.",
-      "source": "Forsyth County News",
-      "source_type": "local-reporting",
-      "category": "schools",
-      "date": "2026-08-12",
-      "link": "https://www.forsythnews.com/sports/softball/softball-forsyth-central-unable-to-hang-with-peachtree-ridge",
-      "approval_status": "approved"
-    },
-    {
-      "id": "e9a71dd6f6e06cea",
-      "title": "Basketball: North Forsyth grad Michael Akinrinmade inks to play collegiately",
-      "summary": "North Forsyth Class of 2026 member Michael Akinrinmade will be playing for a community college in Tennessee.",
-      "source": "Forsyth County News",
-      "source_type": "local-reporting",
-      "category": "schools",
-      "date": "2026-08-12",
-      "link": "https://www.forsythnews.com/sports/basketball/basketball-north-forsyth-grad-michael-akinrinmade-inks-play-collegiately",
-      "approval_status": "approved"
-    },
-    {
-      "id": "3fd22c23133f6ccc",
-      "title": "What new restaurant is coming to this vacant building in south Forsyth County",
-      "summary": "A national chain has chosen this location for its first restaurant in Metro Atlanta.",
-      "source": "Forsyth County News",
-      "source_type": "local-reporting",
-      "category": "business",
-      "date": "2026-08-11",
-      "link": "https://www.forsythnews.com/life/food-drink/what-new-restaurant-is-coming-to-this-vacant-building-in-south-forsyth-county",
-      "approval_status": "approved"
-    },
-    {
-      "id": "1f22c3238eb602de",
-      "title": "Expired eggs, live roach among violations at Forsyth County restaurant that scored 42 on health inspection",
-      "summary": "A Forsyth County restaurant was cited for two dozen health code violations during a recent failed inspection.",
-      "source": "Forsyth County News",
-      "source_type": "local-reporting",
-      "category": "business",
-      "date": "2026-08-11",
-      "link": "https://www.forsythnews.com/life/food-drink/expired-eggs-live-roach-among-violations-at-forsyth-county-restaurant-that-scored-42-on-health-inspection",
-      "approval_status": "approved"
-    },
-    {
-      "id": "c0aebaa551ca4db3",
-      "title": "Cumming Vietnam Veterans of America now accepting applications for nursing scholarship. Here's how to apply",
-      "summary": "Cumming Chapter 1030 of the Vietnam Veterans of America is now accepting applications for the second annual Thomas N. Kirby Memorial Nursing Scholarship. The $5,000 scholarship honors the memory of the late Tom Kirby, a chapter member",
-      "source": "Forsyth County News",
-      "source_type": "local-reporting",
-      "category": "local-news",
-      "date": "2026-08-11",
-      "link": "https://www.forsythnews.com/life/health-wellness/cumming-vietnam-veterans-of-america-now-accepting-applications-for-nursing-scholarship-heres-how-to-apply",
-      "approval_status": "approved"
+      "id": "dcc3d692f60dfd0b",
+      "title": "Civil Service Board – Regular Meeting 10:00 AM",
+      "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
+      "source": "Forsyth County Meetings",
+      "source_type": "official",
+      "category": "government",
+      "date": "2026-08-13",
+      "link": "https://www.forsythco.com/meetings/civil-service-board-regular-meeting-1000-am-4",
+      "approval_status": "approved",
+      "event_date": "2026-08-13",
+      "event_time": "10:00 AM",
+      "event_location": "Forsyth County Juvenile Court Building",
+      "event_type": "Regular Meeting",
+      "calendar_link": "https://www.forsythco.com/juicebox-meetings/ical-export?meeting_id=3860"
     },
     {
       "id": "986d56e71e40da46",
@@ -257,17 +180,6 @@
       "category": "government",
       "date": "2026-08-10",
       "link": "https://www.forsythco.com/news/2026/08/forsyth-county-to-open-registration-for-fall-urban-deer-management-program-2",
-      "approval_status": "approved"
-    },
-    {
-      "id": "b64f09226303b3d8",
-      "title": "Benefit ride set for infant son of Cumming police officer",
-      "summary": "Gavin Fausti, the 4-month-old son of a Cumming police officer, was recently diagnosed with a rare genetic disorder.",
-      "source": "Forsyth County News",
-      "source_type": "local-reporting",
-      "category": "local-news",
-      "date": "2026-08-10",
-      "link": "https://www.forsythnews.com/life/events/benefit-ride-set-for-infant-son-of-cumming-police-officer",
       "approval_status": "approved"
     },
     {
@@ -356,17 +268,6 @@
       "category": "government",
       "date": "2026-08-03",
       "link": "https://www.forsythco.com/news/2026/08/read-the-august-parks-rec-newsletter",
-      "approval_status": "approved"
-    },
-    {
-      "id": "d9b49054c4468956",
-      "title": "Here's why Dobbs Creek Recreation Center will be closed this week",
-      "summary": "City officials said the recreation center will be closed Aug. 3-9.",
-      "source": "Forsyth County News",
-      "source_type": "local-reporting",
-      "category": "local-news",
-      "date": "2026-07-31",
-      "link": "https://www.forsythnews.com/life/parks-recreation/heres-why-dobbs-creek-recreation-center-will-be-closed-next-week",
       "approval_status": "approved"
     },
     {

@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).parents[1] / "scripts"))
-from pipeline import classify, dedupe, normalize_item, merge_publication, parse_meetings, update_queue
+from pipeline import classify, dedupe, normalize_item, merge_publication, parse_meetings, filter_source_items
 
 MEETING_FIXTURE = '''
 <div id="card-3860" class="board-meetings-list__card">
@@ -53,7 +53,7 @@ def test_data_files_are_valid_json():
         json.loads(path.read_text())
 
 def test_reader_oriented_metadata():
-    item = normalize_item({"title":"New restaurant opens in south Forsyth", "summary":"Business opening", "link":"https://example.test/c", "source":"Forsyth County News"}, "local-news", source_type="local-reporting")
+    item = normalize_item({"title":"New restaurant opens in south Forsyth", "summary":"Business opening", "link":"https://example.test/c", "source":"Open source"}, "local-news", source_type="local-reporting")
     assert item["category"] == "business"
     assert item["source_type"] == "local-reporting"
 
@@ -70,5 +70,20 @@ def test_update_queue_drops_stale_approved_items(tmp_path, monkeypatch):
     queue_path = tmp_path / "queue.json"
     queue_path.write_text(json.dumps({"items":[{"id":"old","approval_status":"approved"},{"id":"pending","approval_status":"pending"}], "workflow": {}}))
     monkeypatch.setattr(pipeline, "QUEUE", queue_path)
-    result = update_queue([{"id":"new","approval_status":"approved"}])
+    result = pipeline.update_queue([{"id":"new","approval_status":"approved"}])
     assert {item["id"] for item in result["items"]} == {"new", "pending"}
+
+def test_general_rss_source_is_filtered_to_forsyth():
+    items=[{"title":"Forsyth County commissioners meet", "summary":"Local government", "link":"https://example.test/1"}, {"title":"Atlanta traffic update", "summary":"Metro news", "link":"https://example.test/2"}]
+    result=filter_source_items(items, {"include_terms":["forsyth"]})
+    assert len(result) == 1
+    assert result[0]["title"].startswith("Forsyth")
+
+def test_paywalled_source_is_not_in_source_inventory():
+    import pipeline
+    assert not any("forsythnews.com" in source["url"] for source in pipeline.SOURCES)
+
+if __name__ == "__main__":
+    raise SystemExit("Run with pytest")
+
+__all__ = ["MEETING_FIXTURE"]

@@ -17,7 +17,8 @@ USER_AGENT = "ForsythDailyBrief/0.1 (+https://github.com/bbates79/forsythdailybr
 SOURCES = [
     {"name":"Forsyth County Government", "url":"https://www.forsythco.com/feed/", "category":"government", "source_type":"official", "kind":"rss"},
     {"name":"Forsyth County Sheriff's Office", "url":"https://www.forsythsheriff.org/feed/", "category":"public-safety", "source_type":"official", "kind":"rss"},
-    {"name":"Forsyth County News", "url":"https://www.forsythnews.com/rss/", "category":"local-news", "source_type":"local-reporting", "kind":"rss"},
+    {"name":"11Alive Atlanta", "url":"https://www.11alive.com/feeds/syndication/rss/news", "category":"local-news", "source_type":"local-reporting", "kind":"rss", "include_terms":["forsyth", "cumming"]},
+    {"name":"AccessWDUN / Access North Georgia", "url":"https://accessnorthga.com/feed", "category":"local-news", "source_type":"local-reporting", "kind":"rss", "include_terms":["forsyth", "cumming"]},
     {"name":"Forsyth County Meetings", "url":"https://www.forsythco.com/government/forsyth-county-meetings/?view=upcoming", "category":"government", "source_type":"official", "kind":"meetings"},
 ]
 REVIEW_TERMS = re.compile(r"\b(arrest|arrested|charged|shooting|death|dead|killed|missing|crash|fatal|victim|alleged|allegation|election|suicide|sexual assault|abuse)\b", re.I)
@@ -79,6 +80,12 @@ def parse_rss(text: str, source: dict) -> list[dict]:
             x=node.find(name); return x.text if x is not None and x.text else ""
         out.append(normalize_item({"title":val("title"), "summary":val("description"), "link":val("link"), "published":val("pubDate"), "source":source["name"]}, source["category"], source["source_type"]))
     return out
+
+def filter_source_items(items: list[dict], source: dict) -> list[dict]:
+    terms = [term.lower() for term in source.get("include_terms", [])]
+    if not terms:
+        return items
+    return [item for item in items if any(term in f"{item.get('title', '')} {item.get('summary', '')}".lower() for term in terms)]
 
 class MeetingParser(HTMLParser):
     def __init__(self, base):
@@ -181,6 +188,7 @@ def collect() -> tuple[list[dict], list[str]]:
     for source in SOURCES:
         try:
             parsed=parse_rss(fetch(source["url"]), source) if source["kind"]=="rss" else parse_meetings(fetch(source["url"]), source)
+            parsed=filter_source_items(parsed, source)
             items.extend(parsed)
             print(f"{source['name']}: {len(parsed)} items")
         except Exception as exc:
@@ -236,7 +244,7 @@ def main():
 
 if __name__ == "__main__": main()
 
-__all__=["classify","dedupe","normalize_item","merge_publication"]
+__all__=["classify","dedupe","normalize_item","merge_publication","filter_source_items"]
 
 def _self_check():
     assert clean_url("https://example.test/a?utm_source=x") == "https://example.test/a"
