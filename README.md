@@ -4,7 +4,7 @@ A source-linked, mostly autonomous local briefing for Forsyth County, Georgia.
 
 ## Current state
 
-This repository contains the initial site and the editorial data model. The homepage is live-ready but currently uses a clearly labeled placeholder item. Source adapters will be added incrementally, beginning with official county, school, sheriff, meeting, calendar, and public-notice sources.
+The first source adapters now collect RSS feeds from Forsyth County Government, the Sheriff's Office, and Forsyth County News, plus upcoming county meetings. The homepage publishes approved items only.
 
 ## Editorial workflow
 
@@ -22,6 +22,17 @@ This repository contains the initial site and the editorial data model. The home
 - Forsyth County News
 - WSB-TV Forsyth County coverage
 
+## Collection and approval commands
+
+```bash
+python3 scripts/pipeline.py collect
+python3 scripts/pipeline.py publish
+python3 scripts/pipeline.py approve ITEM_ID
+python3 scripts/pipeline.py reject ITEM_ID
+```
+
+`collect` refreshes `data/approval-queue.json`. Routine items are approved automatically; sensitive candidates remain `pending`. `publish` copies only records whose status is explicitly `approved` into `data/current.json`.
+
 ## Local preview
 
 ```bash
@@ -32,7 +43,7 @@ Then open `http://localhost:8000`.
 
 ## Planned automation
 
-The project is intentionally compatible with the existing static-site/GitHub Actions hosting pattern used by the Conflict Timeline, but it is a separate repository and data set. The daily workflow will fetch sources, deduplicate records, generate summaries, run validation, and commit only verified changes.
+The project is intentionally compatible with the existing static-site/GitHub Actions hosting pattern used by the Conflict Timeline, but it is a separate repository and data set. The daily workflow fetches sources, deduplicates records, applies the approval gate, runs tests, and commits only verified changes.
 
 Proposed domain: `forsythdailybrief.com`.
 

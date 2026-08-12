@@ -18,10 +18,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Validate source inventory and data
-        run: python3 scripts/collect_sources.py
-      - name: Validate JSON
-        run: python3 -c "import json; [json.load(open(p)) for p in ['data/current.json','data/approval-queue.json']]"
+      - name: Collect sources and publish approved items
+        run: python3 scripts/pipeline.py collect
+      - name: Validate with tests
+        run: |
+          python3 -m pip install pytest
+          pytest -q
       - name: Commit generated updates when present
         run: |
           git config user.name 'github-actions[bot]'
@@ -30,3 +32,11 @@ jobs:
           git add data/ review/
           git commit -m "chore: update Forsyth Daily Brief"
           git push
+
+  # Manual approvals should be made locally or through a future protected
+  # workflow; this scheduled job never approves sensitive items.
+  approval-note:
+    if: ${{ false }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Sensitive items require explicit approval before publication."

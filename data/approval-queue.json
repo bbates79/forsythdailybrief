@@ -1,8 +1,399 @@
 {
-  "items": [],
+  "items": [
+    {
+      "id": "43474fb47a3ec4e4",
+      "title": "Goodson Drug v. DEA: How a federal lawsuit has helped to keep the Cumming pharmacy open",
+      "summary": "Goodson Drug Company sued the DEA in federal court after its administrative appeal with the administration seemingly hit a dead end.",
+      "source": "Forsyth County News",
+      "category": "local-news",
+      "date": "2026-08-10",
+      "link": "https://www.forsythnews.com/news/crime-courts/goodson-drug-v-dea-how-a-federal-lawsuit-has-helped-keep-the-cumming-pharmacy-open",
+      "approval_status": "pending"
+    },
+    {
+      "id": "986d56e71e40da46",
+      "title": "Forsyth County to Open Registration for Fall Urban Deer Management Program",
+      "summary": "In continuation of efforts to address an overpopulation of white-tailed deer in the south portion of Forsyth County, Parks & Recreation will host urban deer archery hunts in October. Registration for an adult and a youth archery hunt ... The post Forsyth County to Open Registration for Fall Urban Deer Management Program appeared first on Forsyth County .",
+      "source": "Forsyth County Government",
+      "category": "government",
+      "date": "2026-08-10",
+      "link": "https://www.forsythco.com/news/2026/08/forsyth-county-to-open-registration-for-fall-urban-deer-management-program-2",
+      "approval_status": "approved"
+    },
+    {
+      "id": "0898faa5f3aa9c33",
+      "title": "Two Eagle Scouts Recognized by Board of Commissioners at August 6 Meeting",
+      "summary": "At an Aug. 6 regular meeting, the Forsyth County Board of Commissioners recognized the accomplishments of Laasya Kuchimanchi and Robin Thomas, who both recently earned the Eagle Scout rank, the highest ranking attainable in the Scouting America program. ... The post Two Eagle Scouts Recognized by Board of Commissioners at August 6 Meeting appeared first on Forsyth County .",
+      "source": "Forsyth County Government",
+      "category": "government",
+      "date": "2026-08-07",
+      "link": "https://www.forsythco.com/news/2026/08/two-eagle-scouts-recognized-by-board-of-commissioners-at-august-6-meeting",
+      "approval_status": "approved"
+    },
+    {
+      "id": "5d7d6c056e45add2",
+      "title": "Department of Water & Sewer Recognized for Excellence in Water and Wastewater Systems Operations",
+      "summary": "The Forsyth County Department of Water & Sewer was recognized by the Board of Commissioners for winning 10 prestigious awards from the Georgia Association of Water Professionals (GAWP) at an Aug. 6 regular meeting. The awards received include: ... The post Department of Water & Sewer Recognized for Excellence in Water and Wastewater Systems Operations appeared first on Forsyth County .",
+      "source": "Forsyth County Government",
+      "category": "government",
+      "date": "2026-08-07",
+      "link": "https://www.forsythco.com/news/2026/08/department-of-water-sewer-recognized-for-excellence-in-water-and-wastewater-systems-operations",
+      "approval_status": "approved"
+    },
+    {
+      "id": "c57577dd505a7316",
+      "title": "Learn About and View the 2027 Proposed Budget",
+      "summary": "The Board of Commissioners’ final Proposed Budget for Fiscal Year 2027 is available to view on the Department of Finance’s webpage. The Board of Commissioners will consider and may adopt the proposed budget on Thursday, Aug. 20, at ... The post Learn About and View the 2027 Proposed Budget appeared first on Forsyth County .",
+      "source": "Forsyth County Government",
+      "category": "government",
+      "date": "2026-08-07",
+      "link": "https://www.forsythco.com/news/2026/08/learn-about-and-view-the-2027-proposed-budget",
+      "approval_status": "approved"
+    },
+    {
+      "id": "98580b1a09dd9537",
+      "title": "Flags to Fly at Half-Staff in Honor of 1st Lt. Tyler James Feehan",
+      "summary": "By executive order of Gov. Brian Kemp, the United States and Georgia flags at Forsyth County facilities will fly at half-staff on Friday, Aug. 7, in honor of and to recognize 1st Lt. Tyler James Feehan, who was ... The post Flags to Fly at Half-Staff in Honor of 1st Lt. Tyler James Feehan appeared first on Forsyth County .",
+      "source": "Forsyth County Government",
+      "category": "government",
+      "date": "2026-08-06",
+      "link": "https://www.forsythco.com/news/2026/08/flags-to-fly-at-half-staff-in-honor-of-1st-lt-tyler-james-feehan",
+      "approval_status": "approved"
+    },
+    {
+      "id": "078b0dda22551d87",
+      "title": "How the County Plans Its Budget",
+      "summary": "How does the County budget annually for our public safety needs, road improvements, new parks, trails, library programs, water infrastructure and the services needed to make Forsyth County our home? Chief Financial Officer Brian Clark joins the FoCo ... The post How the County Plans Its Budget appeared first on Forsyth County .",
+      "source": "Forsyth County Government",
+      "category": "government",
+      "date": "2026-08-06",
+      "link": "https://www.forsythco.com/news/2026/08/budget-planning",
+      "approval_status": "approved"
+    },
+    {
+      "id": "a742fff02a32bde4",
+      "title": "Senior Services Hosting Fourth Annual Community Volunteer Fair on August 19",
+      "summary": "Forsyth County Senior Services is hosting its fourth annual Forsyth County Community Volunteer Fair from 1-3 p.m. on Wednesday, Aug. 19, at Sexton Hall Enrichment Center (2115 Chloe Road). This free fair is an opportunity for adults of ... The post Senior Services Hosting Fourth Annual Community Volunteer Fair on August 19 appeared first on Forsyth County .",
+      "source": "Forsyth County Government",
+      "category": "government",
+      "date": "2026-08-05",
+      "link": "https://www.forsythco.com/news/2026/08/senior-services-hosting-fourth-annual-community-volunteer-fair-on-august-19",
+      "approval_status": "approved"
+    },
+    {
+      "id": "3bb08c53727851f5",
+      "title": "Read the Latest Your Forsyth Newsletter",
+      "summary": "In this month’s Your Forsyth newsletter, learn about Forsyth County’s intent to adopt the rollback millage rate, see the latest progress on construction of the new Water Intake facility on Lake Lanier, check out the Fall Activity Guide ... The post Read the Latest Your Forsyth Newsletter appeared first on Forsyth County .",
+      "source": "Forsyth County Government",
+      "category": "government",
+      "date": "2026-08-05",
+      "link": "https://www.forsythco.com/news/2026/08/read-the-latest-forsyth-newsletter",
+      "approval_status": "approved"
+    },
+    {
+      "id": "5fb52a1bca021cb1",
+      "title": "Read the August Parks & Rec Newsletter",
+      "summary": "There’s a new buzz around the parks! August’s edition of The Park Buzz has arrived! Discover upcoming events, programs, park updates and more to help you make the most of the final stretch of summer. Bonus: Fall registration ... The post Read the August Parks & Rec Newsletter appeared first on Forsyth County .",
+      "source": "Forsyth County Government",
+      "category": "government",
+      "date": "2026-08-03",
+      "link": "https://www.forsythco.com/news/2026/08/read-the-august-parks-rec-newsletter",
+      "approval_status": "approved"
+    },
+    {
+      "id": "fdb8d74aa2bc7752",
+      "title": "Work Session Recap | July 28, 2026",
+      "summary": "Miss the July 28 Board of Commissioners Work Session? County Manager David McKee and Communications Director Russell Brown discuss the a few of the meeting’s agenda items including an update from Parks & Recreation Director Kirk Franz on ... The post Work Session Recap | July 28, 2026 appeared first on Forsyth County .",
+      "source": "Forsyth County Government",
+      "category": "government",
+      "date": "2026-07-30",
+      "link": "https://www.forsythco.com/news/2026/07/work-session-recap-july-28-2026",
+      "approval_status": "approved"
+    },
+    {
+      "id": "08bb8de9b6406d3e",
+      "title": "New Podcast Launched: Up In Cumming with Sheriff Ron Freeman",
+      "summary": "A brand-new podcast featuring casual conversations with Sheriff Freeman and a variety of special guests from across Forsyth County. The post New Podcast Launched: Up In Cumming with Sheriff Ron Freeman appeared first on Forsyth County Sheriff's Office .",
+      "source": "Forsyth County Sheriff's Office",
+      "category": "public-safety",
+      "date": "2026-07-16",
+      "link": "https://www.forsythsheriff.org/news/2026/07/new-podcast-launched-2",
+      "approval_status": "approved"
+    },
+    {
+      "id": "fcc3fec73a3dcafe",
+      "title": "Corporate SWAT Challenge",
+      "summary": "Forsyth County Sheriff’s OfficeCORPORATE SWAT CHALLENGE Sheriff Ron Freeman and the Forsyth County Sheriff’s Office invite you to participate in the annual Corporate SWAT Challenge! The challenge includes tactical events that involve endurance activities and strategic thinking. While ... The post Corporate SWAT Challenge appeared first on Forsyth County Sheriff's Office .",
+      "source": "Forsyth County Sheriff's Office",
+      "category": "public-safety",
+      "date": "2026-05-03",
+      "link": "https://www.forsythsheriff.org/news/2026/05/corporate-swat-challenge",
+      "approval_status": "approved"
+    },
+    {
+      "id": "1f22c3238eb602de",
+      "title": "Expired eggs, live roach among violations at Forsyth County restaurant that scored 42 on health inspection",
+      "summary": "A Forsyth County restaurant was cited for two dozen health code violations during a recent failed inspection.",
+      "source": "Forsyth County News",
+      "category": "local-news",
+      "date": "2026-08-11",
+      "link": "https://www.forsythnews.com/life/food-drink/expired-eggs-live-roach-among-violations-at-forsyth-county-restaurant-that-scored-42-on-health-inspection",
+      "approval_status": "approved"
+    },
+    {
+      "id": "3fd22c23133f6ccc",
+      "title": "What new restaurant is coming to this vacant building in south Forsyth County",
+      "summary": "A national chain has chosen this location for its first restaurant in Metro Atlanta.",
+      "source": "Forsyth County News",
+      "category": "local-news",
+      "date": "2026-08-11",
+      "link": "https://www.forsythnews.com/life/food-drink/what-new-restaurant-is-coming-to-this-vacant-building-in-south-forsyth-county",
+      "approval_status": "approved"
+    },
+    {
+      "id": "c0aebaa551ca4db3",
+      "title": "Cumming Vietnam Veterans of America now accepting applications for nursing scholarship. Here's how to apply",
+      "summary": "Cumming Chapter 1030 of the Vietnam Veterans of America is now accepting applications for the second annual Thomas N. Kirby Memorial Nursing Scholarship. The $5,000 scholarship honors the memory of the late Tom Kirby, a chapter member",
+      "source": "Forsyth County News",
+      "category": "local-news",
+      "date": "2026-08-11",
+      "link": "https://www.forsythnews.com/life/health-wellness/cumming-vietnam-veterans-of-america-now-accepting-applications-for-nursing-scholarship-heres-how-to-apply",
+      "approval_status": "approved"
+    },
+    {
+      "id": "b64f09226303b3d8",
+      "title": "Benefit ride set for infant son of Cumming police officer",
+      "summary": "Gavin Fausti, the 4-month-old son of a Cumming police officer, was recently diagnosed with a rare genetic disorder.",
+      "source": "Forsyth County News",
+      "category": "local-news",
+      "date": "2026-08-10",
+      "link": "https://www.forsythnews.com/life/events/benefit-ride-set-for-infant-son-of-cumming-police-officer",
+      "approval_status": "approved"
+    },
+    {
+      "id": "9cb91785a5348b21",
+      "title": "These two former UGA football greats will headline the 7th annual Fan Fest in Forsyth County",
+      "summary": "Organizers say this year’s Fan Fest will be bigger than ever.",
+      "source": "Forsyth County News",
+      "category": "local-news",
+      "date": "2026-08-12",
+      "link": "https://www.forsythnews.com/life/events/these-two-former-uga-football-greats-will-headline-the-7th-annual-fan-fest-in-forsyth-county",
+      "approval_status": "approved"
+    },
+    {
+      "id": "d9b49054c4468956",
+      "title": "Here's why Dobbs Creek Recreation Center will be closed this week",
+      "summary": "City officials said the recreation center will be closed Aug. 3-9.",
+      "source": "Forsyth County News",
+      "category": "local-news",
+      "date": "2026-07-31",
+      "link": "https://www.forsythnews.com/life/parks-recreation/heres-why-dobbs-creek-recreation-center-will-be-closed-next-week",
+      "approval_status": "approved"
+    },
+    {
+      "id": "46f921575810248e",
+      "title": "Soccer: East Forsyth's Alex Ponce commits to play at next level",
+      "summary": "Alex Ponce, who earned Region 8-4A Player of the Year this spring, verbally committed to continue his soccer career at the Division-III level.",
+      "source": "Forsyth County News",
+      "category": "local-news",
+      "date": "2026-08-11",
+      "link": "https://www.forsythnews.com/sports/soccer/soccer-east-forsyths-alex-ponce-commits-play-next-level",
+      "approval_status": "approved"
+    },
+    {
+      "id": "8d0db636a5804169",
+      "title": "Softball: East Forsyth senior Kendall Linn announces Division-I commitment",
+      "summary": "East Forsyth senior Kendall Linn will be heading to North Carolina to play softball at the next level.",
+      "source": "Forsyth County News",
+      "category": "local-news",
+      "date": "2026-08-11",
+      "link": "https://www.forsythnews.com/sports/softball/softball-east-forsyth-senior-kendall-linn-announces-division-i-commitment",
+      "approval_status": "approved"
+    },
+    {
+      "id": "8e2f36bdb7ae58c0",
+      "title": "Softball: North Forsyth racks up home runs in road victory",
+      "summary": "North Forsyth hit four home runs, including two by Carlyann Wilkes, during a run-rule win over Woodstock.",
+      "source": "Forsyth County News",
+      "category": "local-news",
+      "date": "2026-08-11",
+      "link": "https://www.forsythnews.com/sports/softball/softball-north-forsyth-racks-up-home-runs-in-road-victory",
+      "approval_status": "approved"
+    },
+    {
+      "id": "03a13db8d3c529f3",
+      "title": "Forsyth County Meetings",
+      "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
+      "source": "Forsyth County Meetings",
+      "category": "government",
+      "date": "2026-08-12",
+      "link": "https://www.forsythco.com/government/forsyth-county-meetings",
+      "approval_status": "approved"
+    },
+    {
+      "id": "c9b25a35ba697f60",
+      "title": "BOC Meeting Minutes Library",
+      "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
+      "source": "Forsyth County Meetings",
+      "category": "government",
+      "date": "2026-08-12",
+      "link": "http://weblink.mccinnovations.com/weblink8/Login.aspx?LogName=Forsyth+County+GA",
+      "approval_status": "approved"
+    },
+    {
+      "id": "37f38ae178e689dd",
+      "title": "Meeting Video Archive",
+      "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
+      "source": "Forsyth County Meetings",
+      "category": "government",
+      "date": "2026-08-12",
+      "link": "https://www.forsythco.com/government/forsyth-county-meetings/meeting-archive",
+      "approval_status": "approved"
+    },
+    {
+      "id": "f449662c15cb33ee",
+      "title": "Upcoming Meetings",
+      "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
+      "source": "Forsyth County Meetings",
+      "category": "government",
+      "date": "2026-08-12",
+      "link": "https://www.forsythco.com/government/forsyth-county-meetings?view=upcoming",
+      "approval_status": "approved"
+    },
+    {
+      "id": "d72e38f40ec61951",
+      "title": "Past Meetings",
+      "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
+      "source": "Forsyth County Meetings",
+      "category": "government",
+      "date": "2026-08-12",
+      "link": "https://www.forsythco.com/government/forsyth-county-meetings?view=past",
+      "approval_status": "approved"
+    },
+    {
+      "id": "dcc3d692f60dfd0b",
+      "title": "Civil Service Board – Regular Meeting 10:00 AM",
+      "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
+      "source": "Forsyth County Meetings",
+      "category": "government",
+      "date": "2026-08-12",
+      "link": "https://www.forsythco.com/meetings/civil-service-board-regular-meeting-1000-am-4",
+      "approval_status": "approved"
+    },
+    {
+      "id": "b88936ae84b7bdbd",
+      "title": "Civil Service Board – Regular Meeting 10:00 AM",
+      "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
+      "source": "Forsyth County Meetings",
+      "category": "government",
+      "date": "2026-08-12",
+      "link": "https://www.forsythco.com/meetings/civil-service-board-regular-meeting-1000-am-10",
+      "approval_status": "approved"
+    },
+    {
+      "id": "96b04a34126e7200",
+      "title": "Board of Assessors – Regular Meeting",
+      "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
+      "source": "Forsyth County Meetings",
+      "category": "government",
+      "date": "2026-08-12",
+      "link": "https://www.forsythco.com/meetings/board-of-assessors-regular-meeting",
+      "approval_status": "approved"
+    },
+    {
+      "id": "fc18f549edfc1b48",
+      "title": "TriPartite Meeting",
+      "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
+      "source": "Forsyth County Meetings",
+      "category": "government",
+      "date": "2026-08-12",
+      "link": "https://www.forsythco.com/meetings/tripartite-meeting",
+      "approval_status": "approved"
+    },
+    {
+      "id": "c515934b5748e0f5",
+      "title": "Planning Commission Work Session",
+      "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
+      "source": "Forsyth County Meetings",
+      "category": "government",
+      "date": "2026-08-12",
+      "link": "https://www.forsythco.com/meetings/planning-commission-work-session-3",
+      "approval_status": "approved"
+    },
+    {
+      "id": "0472d5b2d942b609",
+      "title": "Board of Commissioners Regular Meeting / Public Hearings",
+      "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
+      "source": "Forsyth County Meetings",
+      "category": "government",
+      "date": "2026-08-12",
+      "link": "https://www.forsythco.com/meetings/board-of-commissioners-regular-meeting-public-hearings-3",
+      "approval_status": "approved"
+    },
+    {
+      "id": "fe3f14d86b5e6c46",
+      "title": "Board of Commissioners Work Session Meeting",
+      "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
+      "source": "Forsyth County Meetings",
+      "category": "government",
+      "date": "2026-08-12",
+      "link": "https://www.forsythco.com/meetings/board-of-commissioners-work-session-meeting-4",
+      "approval_status": "approved"
+    },
+    {
+      "id": "d8d2a789b4622590",
+      "title": "Planning Commission Regular Meeting/Public Hearings",
+      "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
+      "source": "Forsyth County Meetings",
+      "category": "government",
+      "date": "2026-08-12",
+      "link": "https://www.forsythco.com/meetings/19009",
+      "approval_status": "approved"
+    },
+    {
+      "id": "61373285b80d9cb2",
+      "title": "Zoning Board of Appeals Work Session",
+      "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
+      "source": "Forsyth County Meetings",
+      "category": "government",
+      "date": "2026-08-12",
+      "link": "https://www.forsythco.com/meetings/zoning-board-of-appeals-work-session",
+      "approval_status": "approved"
+    },
+    {
+      "id": "6403a0f5a46b6d2a",
+      "title": "Zoning Board of Appeals Regular Meeting/Public Hearings",
+      "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
+      "source": "Forsyth County Meetings",
+      "category": "government",
+      "date": "2026-08-12",
+      "link": "https://www.forsythco.com/meetings/zoning-board-of-appeals-regular-meeting-public-hearings-2",
+      "approval_status": "approved"
+    }
+  ],
   "workflow": {
-    "automatic_categories": ["government", "schools", "events", "weather", "transportation", "public-notice"],
-    "review_categories": ["crime", "deaths", "emergency", "elections", "allegations", "sensitive-personal-news"],
-    "statuses": ["pending", "approved", "rejected", "held"]
-  }
+    "automatic_categories": [
+      "government",
+      "schools",
+      "events",
+      "weather",
+      "transportation",
+      "public-notice"
+    ],
+    "review_categories": [
+      "crime",
+      "deaths",
+      "emergency",
+      "elections",
+      "allegations",
+      "sensitive-personal-news"
+    ],
+    "statuses": [
+      "pending",
+      "approved",
+      "rejected",
+      "held"
+    ]
+  },
+  "updated_at": "2026-08-12T02:26:56.242966+00:00"
 }
