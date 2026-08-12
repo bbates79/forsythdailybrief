@@ -1,0 +1,25 @@
+{
+  "updated_at": "2026-08-11T12:00:00Z",
+  "lead": {
+    "title": "Forsyth Daily Brief is coming soon",
+    "summary": "The first edition will combine public meetings, school notices, safety information, events, and local reporting for Forsyth County.",
+    "link": ""
+  },
+  "facts": {
+    "meetings": "County and school-board calendars will highlight what residents can attend or follow next.",
+    "schools": "District announcements and key calendar items will be separated from general news.",
+    "sources": "Every published item will link to its original public source."
+  },
+  "items": [
+    {
+      "id": "welcome-001",
+      "title": "Forsyth Daily Brief is being built from public sources",
+      "summary": "This initial placeholder confirms the site structure. The automated collector will add approved local updates as source integrations are enabled.",
+      "source": "Forsyth Daily Brief",
+      "category": "about",
+      "date": "2026-08-11",
+      "link": "https://www.forsythco.com/",
+      "approval_status": "approved"
+    }
+  ]
+}

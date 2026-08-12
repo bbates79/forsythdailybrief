@@ -1,0 +1,32 @@
+name: Daily Brief Update
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 10 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate source inventory and data
+        run: python3 scripts/collect_sources.py
+      - name: Validate JSON
+        run: python3 -c "import json; [json.load(open(p)) for p in ['data/current.json','data/approval-queue.json']]"
+      - name: Commit generated updates when present
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          if git diff --quiet; then exit 0; fi
+          git add data/ review/
+          git commit -m "chore: update Forsyth Daily Brief"
+          git push

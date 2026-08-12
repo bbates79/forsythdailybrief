@@ -1,0 +1,8 @@
+{
+  "items": [],
+  "workflow": {
+    "automatic_categories": ["government", "schools", "events", "weather", "transportation", "public-notice"],
+    "review_categories": ["crime", "deaths", "emergency", "elections", "allegations", "sensitive-personal-news"],
+    "statuses": ["pending", "approved", "rejected", "held"]
+  }
+}
