@@ -19,6 +19,7 @@ The first source adapters now collect RSS feeds from Forsyth County Government, 
 - Forsyth County Government and meeting calendar
 - Forsyth County Schools and district calendar
 - Forsyth County Sheriff's Office
+- Forsyth County Government YouTube channel via its public Atom feed; videos become source-linked article candidates
 - 11Alive Atlanta, filtered to Forsyth/Cumming mentions
 - AccessWDUN / Access North Georgia, filtered to Forsyth/Cumming mentions
 - WSB-TV remains a research candidate; no stable public RSS endpoint has been confirmed yet

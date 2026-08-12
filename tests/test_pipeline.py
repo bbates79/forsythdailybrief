@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).parents[1] / "scripts"))
-from pipeline import classify, dedupe, normalize_item, merge_publication, parse_meetings, filter_source_items
+from pipeline import classify, dedupe, normalize_item, merge_publication, parse_meetings, filter_source_items, parse_youtube
 
 MEETING_FIXTURE = '''
 <div id="card-3860" class="board-meetings-list__card">

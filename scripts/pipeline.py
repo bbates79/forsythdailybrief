@@ -20,6 +20,7 @@ SOURCES = [
     {"name":"11Alive Atlanta", "url":"https://www.11alive.com/feeds/syndication/rss/news", "category":"local-news", "source_type":"local-reporting", "kind":"rss", "include_terms":["forsyth", "cumming"]},
     {"name":"AccessWDUN / Access North Georgia", "url":"https://accessnorthga.com/feed", "category":"local-news", "source_type":"local-reporting", "kind":"rss", "include_terms":["forsyth", "cumming"]},
     {"name":"Forsyth County Meetings", "url":"https://www.forsythco.com/government/forsyth-county-meetings/?view=upcoming", "category":"government", "source_type":"official", "kind":"meetings"},
+    {"name":"Forsyth County Government YouTube", "url":"https://www.youtube.com/feeds/videos.xml?channel_id=UCpTkRB5ucY66KGtvsKQhRsw", "category":"government", "source_type":"official", "kind":"youtube"},
 ]
 REVIEW_TERMS = re.compile(r"\b(arrest|arrested|charged|shooting|death|dead|killed|missing|crash|fatal|victim|alleged|allegation|election|suicide|sexual assault|abuse)\b", re.I)
 WEATHER_STATIONS = [
@@ -90,6 +91,22 @@ def parse_rss(text: str, source: dict) -> list[dict]:
         def val(name):
             x=node.find(name); return x.text if x is not None and x.text else ""
         out.append(normalize_item({"title":val("title"), "summary":val("description"), "link":val("link"), "published":val("pubDate"), "source":source["name"]}, source["category"], source["source_type"]))
+    return out
+
+def parse_youtube(text: str, source: dict) -> list[dict]:
+    root = ET.fromstring(text)
+    ns = {"atom":"http://www.w3.org/2005/Atom", "media":"http://search.yahoo.com/mrss/", "yt":"http://www.youtube.com/xml/schemas/2015"}
+    out=[]
+    for entry in root.findall("atom:entry", ns):
+        title = entry.findtext("atom:title", "", ns)
+        link_node = entry.find("atom:link", ns)
+        link = link_node.attrib.get("href", "") if link_node is not None else ""
+        published = entry.findtext("atom:published", "", ns)
+        description = entry.findtext("media:group/media:description", "", ns)
+        video_id = entry.findtext("yt:videoId", "", ns)
+        item = normalize_item({"title":title, "summary":description, "link":link, "published":published, "source":source["name"]}, "government", source["source_type"])
+        item.update({"content_type":"video", "video_id":video_id, "thumbnail":f"https://i.ytimg.com/vi/{video_id}/hqdefault.jpg"})
+        out.append(item)
     return out
 
 def filter_source_items(items: list[dict], source: dict) -> list[dict]:
@@ -244,7 +261,12 @@ def collect() -> tuple[list[dict], list[str]]:
     items=[]; errors=[]
     for source in SOURCES:
         try:
-            parsed=parse_rss(fetch(source["url"]), source) if source["kind"]=="rss" else parse_meetings(fetch(source["url"]), source)
+            if source["kind"] == "rss":
+                parsed=parse_rss(fetch(source["url"]), source)
+            elif source["kind"] == "youtube":
+                parsed=parse_youtube(fetch(source["url"]), source)
+            else:
+                parsed=parse_meetings(fetch(source["url"]), source)
             parsed=filter_source_items(parsed, source)
             items.extend(parsed)
             print(f"{source['name']}: {len(parsed)} items")
@@ -310,7 +332,7 @@ def main():
 
 if __name__ == "__main__": main()
 
-__all__=["classify","dedupe","normalize_item","merge_publication","filter_source_items","WEATHER_STATIONS","parse_weatherstem","aggregate_weather","parse_usgs_lake_level","empty_lake_level"]
+__all__=["classify","dedupe","normalize_item","merge_publication","filter_source_items","WEATHER_STATIONS","parse_weatherstem","aggregate_weather","parse_usgs_lake_level","empty_lake_level","parse_youtube"]
 
 def _self_check():
     assert clean_url("https://example.test/a?utm_source=x") == "https://example.test/a"
