@@ -31,6 +31,8 @@ WEATHER_STATIONS = [
     {"handle":"cumming", "name":"University of North Georgia Cumming"},
 ]
 WEATHER_URL = "https://cdn.weatherstem.com/dashboard/data/dynamic/model/forsyth-ga/{handle}/latest.json"
+USGS_LAKE_LEVEL_URL = "https://waterservices.usgs.gov/nwis/iv/?format=json&sites=02334400&parameterCd=00062&period=P1D"
+USGS_LAKE_SOURCE = "https://waterdata.usgs.gov/monitoring-location/USGS-02334400"
 
 def fetch(url: str) -> str:
     req = Request(url, headers={"User-Agent": USER_AGENT, "Accept": "application/rss+xml, application/xml, text/html"})
@@ -123,6 +125,24 @@ def collect_weather() -> tuple[dict, list[str]]:
         except Exception as exc:
             errors.append(f"WeatherSTEM {station['handle']}: {exc}")
     return aggregate_weather(observations), errors
+
+def empty_lake_level(error: str = "") -> dict:
+    return {"status":"unavailable", "site":"02334400", "level_ft":None, "observed_at":"", "provisional":None, "source_url":USGS_LAKE_SOURCE, "error":error}
+
+def parse_usgs_lake_level(data: dict) -> dict:
+    try:
+        series = data["value"]["timeSeries"][0]
+        readings = series["values"][0]["value"]
+        reading = readings[-1]
+        return {"status":"ok", "site":"02334400", "level_ft":float(reading["value"]), "observed_at":reading["dateTime"], "provisional":"P" in reading.get("qualifiers", []), "variable":series["variable"].get("variableName", ""), "source_url":USGS_LAKE_SOURCE}
+    except (KeyError, IndexError, TypeError, ValueError):
+        return empty_lake_level("USGS response did not contain a usable latest reading")
+
+def collect_lake_level() -> dict:
+    try:
+        return parse_usgs_lake_level(json.loads(fetch(USGS_LAKE_LEVEL_URL)))
+    except Exception as exc:
+        return empty_lake_level(str(exc))
 
 class MeetingParser(HTMLParser):
     def __init__(self, base):
@@ -268,7 +288,9 @@ def publish():
     result = merge_publication(read_json(CURRENT), read_json(QUEUE))
     result = refresh_facts(result, result.get("items", []))
     result["weather"] = collect_weather()[0]
+    result["lake_lanier"] = collect_lake_level()
     write_json(ROOT / "data/weather.json", result["weather"])
+    write_json(ROOT / "data/lake-lanier.json", result["lake_lanier"])
     write_json(CURRENT, result)
 
 def main():
@@ -288,7 +310,7 @@ def main():
 
 if __name__ == "__main__": main()
 
-__all__=["classify","dedupe","normalize_item","merge_publication","filter_source_items","WEATHER_STATIONS","parse_weatherstem","aggregate_weather"]
+__all__=["classify","dedupe","normalize_item","merge_publication","filter_source_items","WEATHER_STATIONS","parse_weatherstem","aggregate_weather","parse_usgs_lake_level","empty_lake_level"]
 
 def _self_check():
     assert clean_url("https://example.test/a?utm_source=x") == "https://example.test/a"

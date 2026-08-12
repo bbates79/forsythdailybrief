@@ -25,6 +25,12 @@ The first source adapters now collect RSS feeds from Forsyth County Government, 
 
 Forsyth County News is intentionally not an active adapter because its articles are paywalled. We may still use it as a manual lead source later, but the automated brief should prefer sources readers can open.
 
+## Current weather and lake level
+
+Current observations come from the six public WeatherSTEM stations listed by Forsyth County: Alliance Academy, three fire stations, the Public Safety Complex, and UNG Cumming. The collector stores a median county snapshot plus station-level observations.
+
+Lake Lanier level comes from USGS monitoring location 02334400, “Lake Sidney Lanier Near Buford, GA,” using parameter 00062 (reservoir water-surface elevation in feet). Readings are marked provisional when USGS marks them provisional, and the site links back to the USGS location page.
+
 ## Collection and approval commands
 
 ```bash
