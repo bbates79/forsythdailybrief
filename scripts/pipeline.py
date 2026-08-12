@@ -313,7 +313,12 @@ def publish():
     result["lake_lanier"] = collect_lake_level()
     write_json(ROOT / "data/weather.json", result["weather"])
     write_json(ROOT / "data/lake-lanier.json", result["lake_lanier"])
-    result["articles"] = [item for item in read_json(QUEUE).get("items", []) if item.get("approval_status") == "approved" and item.get("article_path")]
+    result["articles"] = []
+    for item in read_json(QUEUE).get("items", []):
+        if item.get("approval_status") == "approved" and item.get("article_path"):
+            article = dict(item)
+            article["article_html_path"] = article.get("article_html_path") or article["article_path"].replace(".md", ".html")
+            result["articles"].append(article)
     write_json(CURRENT, result)
 
 def main():
