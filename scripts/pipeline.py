@@ -22,6 +22,15 @@ SOURCES = [
     {"name":"Forsyth County Meetings", "url":"https://www.forsythco.com/government/forsyth-county-meetings/?view=upcoming", "category":"government", "source_type":"official", "kind":"meetings"},
 ]
 REVIEW_TERMS = re.compile(r"\b(arrest|arrested|charged|shooting|death|dead|killed|missing|crash|fatal|victim|alleged|allegation|election|suicide|sexual assault|abuse)\b", re.I)
+WEATHER_STATIONS = [
+    {"handle":"allianceacademy", "name":"Alliance Academy"},
+    {"handle":"fire4", "name":"Forsyth County Fire Station 4"},
+    {"handle":"fire6", "name":"Forsyth County Fire Station 6"},
+    {"handle":"fire8", "name":"Forsyth County Fire Station 8"},
+    {"handle":"forsythema", "name":"Forsyth Public Safety Complex"},
+    {"handle":"cumming", "name":"University of North Georgia Cumming"},
+]
+WEATHER_URL = "https://cdn.weatherstem.com/dashboard/data/dynamic/model/forsyth-ga/{handle}/latest.json"
 
 def fetch(url: str) -> str:
     req = Request(url, headers={"User-Agent": USER_AGENT, "Accept": "application/rss+xml, application/xml, text/html"})
@@ -86,6 +95,34 @@ def filter_source_items(items: list[dict], source: dict) -> list[dict]:
     if not terms:
         return items
     return [item for item in items if any(term in f"{item.get('title', '')} {item.get('summary', '')}".lower() for term in terms)]
+
+def parse_weatherstem(data: dict, handle: str) -> dict:
+    values = {str(row.get("sensor_name", "")): row.get("value") for row in data.get("records", [])}
+    def number(name):
+        value = values.get(name)
+        try: return float(value) if value is not None else None
+        except (TypeError, ValueError): return None
+    return {"station": handle, "observed_at": data.get("time", ""), "temperature_f": number("Thermometer"), "dewpoint_f": number("Dewpoint"), "heat_index_f": number("Heat Index"), "humidity_percent": number("Hygrometer"), "wind_mph": number("Anemometer"), "wind_gust_mph": number("10 Minute Wind Gust"), "wind_direction_deg": number("Wind Vane"), "rain_24h_in": number("Rain: Accum last 24 hr")}
+
+def aggregate_weather(observations: list[dict]) -> dict:
+    valid = [item for item in observations if item.get("temperature_f") is not None]
+    if not valid:
+        return {"status":"unavailable", "station_count":0, "temperature_f":None, "observed_at":"", "stations":[]}
+    def median(name):
+        values = sorted(item[name] for item in valid if item.get(name) is not None)
+        return round(values[len(values)//2] if len(values)%2 else (values[len(values)//2-1]+values[len(values)//2])/2, 1) if values else None
+    latest = max(valid, key=lambda x: x.get("observed_at", ""))
+    return {"status":"ok", "station_count":len(valid), "temperature_f":median("temperature_f"), "dewpoint_f":median("dewpoint_f"), "heat_index_f":median("heat_index_f"), "humidity_percent":median("humidity_percent"), "wind_mph":median("wind_mph"), "wind_gust_mph":median("wind_gust_mph"), "rain_24h_in":round(sum(item.get("rain_24h_in") or 0 for item in valid)/len(valid), 2), "observed_at":latest.get("observed_at", ""), "stations":valid}
+
+def collect_weather() -> tuple[dict, list[str]]:
+    observations=[]; errors=[]
+    for station in WEATHER_STATIONS:
+        try:
+            data=json.loads(fetch(WEATHER_URL.format(handle=station["handle"])))
+            observations.append(parse_weatherstem(data, station["handle"]))
+        except Exception as exc:
+            errors.append(f"WeatherSTEM {station['handle']}: {exc}")
+    return aggregate_weather(observations), errors
 
 class MeetingParser(HTMLParser):
     def __init__(self, base):
@@ -229,10 +266,17 @@ def refresh_facts(result: dict, items: list[dict]) -> dict:
 
 def publish():
     result = merge_publication(read_json(CURRENT), read_json(QUEUE))
-    write_json(CURRENT, refresh_facts(result, result.get("items", [])))
+    result = refresh_facts(result, result.get("items", []))
+    result["weather"] = collect_weather()[0]
+    write_json(ROOT / "data/weather.json", result["weather"])
+    write_json(CURRENT, result)
 
 def main():
-    parser=argparse.ArgumentParser(); parser.add_argument("command", choices=["collect","publish","approve","reject"]); parser.add_argument("ids", nargs="*"); args=parser.parse_args()
+    parser=argparse.ArgumentParser(); parser.add_argument("command", choices=["collect","publish","weather","approve","reject"]); parser.add_argument("ids", nargs="*"); args=parser.parse_args()
+    if args.command == "weather":
+        weather, errors = collect_weather(); print(json.dumps(weather, indent=2))
+        if errors: print("\n".join(errors), file=sys.stderr)
+        return
     if args.command == "collect":
         items, errors=collect(); queue=update_queue(items); publish(); print(f"Collected {len(items)} unique items; {sum(x['approval_status']=='pending' for x in items)} pending review; {len(errors)} source errors")
     elif args.command == "publish": publish(); print("Published approved items only.")
@@ -244,7 +288,7 @@ def main():
 
 if __name__ == "__main__": main()
 
-__all__=["classify","dedupe","normalize_item","merge_publication","filter_source_items"]
+__all__=["classify","dedupe","normalize_item","merge_publication","filter_source_items","WEATHER_STATIONS","parse_weatherstem","aggregate_weather"]
 
 def _self_check():
     assert clean_url("https://example.test/a?utm_source=x") == "https://example.test/a"
