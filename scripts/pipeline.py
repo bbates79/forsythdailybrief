@@ -15,10 +15,10 @@ CURRENT = ROOT / "data/current.json"
 QUEUE = ROOT / "data/approval-queue.json"
 USER_AGENT = "ForsythDailyBrief/0.1 (+https://github.com/bbates79/forsythdailybrief)"
 SOURCES = [
-    {"name":"Forsyth County Government", "url":"https://www.forsythco.com/feed/", "category":"government", "kind":"rss"},
-    {"name":"Forsyth County Sheriff's Office", "url":"https://www.forsythsheriff.org/feed/", "category":"public-safety", "kind":"rss"},
-    {"name":"Forsyth County News", "url":"https://www.forsythnews.com/rss/", "category":"local-news", "kind":"rss"},
-    {"name":"Forsyth County Meetings", "url":"https://www.forsythco.com/government/forsyth-county-meetings/?view=upcoming", "category":"government", "kind":"meetings"},
+    {"name":"Forsyth County Government", "url":"https://www.forsythco.com/feed/", "category":"government", "source_type":"official", "kind":"rss"},
+    {"name":"Forsyth County Sheriff's Office", "url":"https://www.forsythsheriff.org/feed/", "category":"public-safety", "source_type":"official", "kind":"rss"},
+    {"name":"Forsyth County News", "url":"https://www.forsythnews.com/rss/", "category":"local-news", "source_type":"local-reporting", "kind":"rss"},
+    {"name":"Forsyth County Meetings", "url":"https://www.forsythco.com/government/forsyth-county-meetings/?view=upcoming", "category":"government", "source_type":"official", "kind":"meetings"},
 ]
 REVIEW_TERMS = re.compile(r"\b(arrest|arrested|charged|shooting|death|dead|killed|missing|crash|fatal|victim|alleged|allegation|election|suicide|sexual assault|abuse)\b", re.I)
 
@@ -42,14 +42,34 @@ def iso_date(value: str | None) -> str:
 def classify(title: str, summary: str) -> str:
     return "pending" if REVIEW_TERMS.search(f"{title} {summary}") else "approved"
 
-def normalize_item(raw: dict, category: str) -> dict:
+def reader_category(category: str, title: str, summary: str) -> str:
+    text = f"{title} {summary}".lower()
+    if category == "local-news":
+        if any(word in text for word in ("restaurant", "business", "opening", "building", "commercial")): return "business"
+        if any(word in text for word in ("school", "student", "softball", "soccer", "volleyball", "basketball")): return "schools"
+        if "event" in text or "festival" in text: return "events"
+    return category
+
+def normalize_item(raw: dict, category: str, source_type: str = "official") -> dict:
     title = html.unescape(re.sub(r"\s+", " ", raw.get("title", "")).strip())
     summary = html.unescape(re.sub(r"<[^>]+>", " ", raw.get("summary", "")))
     summary = re.sub(r"\s+", " ", summary).strip()[:500]
     link = clean_url(raw.get("link", ""))
+    category = reader_category(category, title, summary)
     status = classify(title, summary)
     stable = hashlib.sha256((link or title).encode()).hexdigest()[:16]
-    return {"id": stable, "title": title or "Untitled local update", "summary": summary, "source": raw.get("source", "Public source"), "category": category, "date": iso_date(raw.get("published")), "link": link, "approval_status": status}
+    item = {"id": stable, "title": title or "Untitled local update", "summary": summary, "source": raw.get("source", "Public source"), "source_type": source_type, "category": category, "date": iso_date(raw.get("published")), "link": link, "approval_status": status}
+    if raw.get("event_date_raw"):
+        try:
+            item["event_date"] = datetime.strptime(raw["event_date_raw"], "%B %d, %Y").date().isoformat()
+        except ValueError:
+            item["event_date"] = raw["event_date_raw"]
+        item["event_time"] = raw.get("event_time", "")
+        item["event_location"] = raw.get("event_location", "")
+        item["event_type"] = raw.get("event_type", "")
+        item["calendar_link"] = raw.get("calendar_link", "")
+        item["date"] = item["event_date"]
+    return item
 
 def parse_rss(text: str, source: dict) -> list[dict]:
     root = ET.fromstring(text)
@@ -57,29 +77,94 @@ def parse_rss(text: str, source: dict) -> list[dict]:
     for node in root.findall(".//item"):
         def val(name):
             x=node.find(name); return x.text if x is not None and x.text else ""
-        out.append(normalize_item({"title":val("title"), "summary":val("description"), "link":val("link"), "published":val("pubDate"), "source":source["name"]}, source["category"]))
+        out.append(normalize_item({"title":val("title"), "summary":val("description"), "link":val("link"), "published":val("pubDate"), "source":source["name"]}, source["category"], source["source_type"]))
     return out
 
 class MeetingParser(HTMLParser):
     def __init__(self, base):
-        super().__init__(); self.base=base; self.href=""; self.text=[]; self.items=[]; self.in_heading=False
+        super().__init__()
+        self.base = base
+        self.href = ""
+        self.text = []
+        self.items = []
+        self.card = None
+        self.card_depth = 0
+        self.active_class = ""
+
     def handle_starttag(self, tag, attrs):
-        attrs=dict(attrs)
-        if tag == "a" and attrs.get("href"): self.href=urljoin(self.base, attrs["href"]); self.text=[]
+        attrs = dict(attrs)
+        classes = attrs.get("class") or ""
+        if tag == "div" and "board-meetings-list__card" in classes:
+            self.card = {"title":"", "summary":"Upcoming public meeting or hearing listed by Forsyth County.", "link":"", "published":"", "source":"Forsyth County Meetings", "event_date_raw":"", "event_time":"", "event_location":"", "event_type":"", "calendar_link":""}
+            self.card_depth = 1
+        elif self.card is not None and tag == "div":
+            self.card_depth += 1
+        self.active_class = classes
+        if tag == "a" and attrs.get("href"):
+            self.href = urljoin(self.base, attrs["href"])
+            self.text = []
+
     def handle_data(self, data):
-        if self.href: self.text.append(data)
+        value = re.sub(r"\s+", " ", data).strip()
+        if self.href:
+            self.text.append(data)
+        if self.card is not None and not self.href and value:
+            if "board-meetings-list__card-date-text" in self.active_class:
+                self.card["event_date_raw"] = value
+            elif "board-meetings-list__card-type" in self.active_class:
+                self.card["event_type"] = value
+            elif "board-meetings-list__card-detail-text" in self.active_class:
+                if not self.card["event_time"] and re.search(r"\d", value):
+                    self.card["event_time"] = value
+                elif not self.card["event_location"]:
+                    self.card["event_location"] = value
+
     def handle_endtag(self, tag):
         if tag == "a" and self.href:
-            value=re.sub(r"\s+", " ", " ".join(self.text)).strip()
-            if value and ("/meetings/" in self.href or "meeting" in value.lower()): self.items.append({"title":value, "summary":"Upcoming public meeting or hearing listed by Forsyth County.", "link":self.href, "published":"", "source":"Forsyth County Meetings"})
-            self.href=""; self.text=[]
+            value = re.sub(r"\s+", " ", " ".join(self.text)).strip()
+            if self.card is not None:
+                if "ical-export" in self.href:
+                    self.card["calendar_link"] = self.href
+                elif "/meetings/" in self.href and value:
+                    self.card["title"] = value
+                    self.card["link"] = self.href
+            self.href = ""
+            self.text = []
+        if self.card is not None and tag == "div":
+            self.card_depth -= 1
+            if self.card_depth == 0:
+                if self.card.get("link") and self.card.get("title"):
+                    self.items.append(self.card)
+                self.card = None
+        self.active_class = ""
+
+    def handle_startendtag(self, tag, attrs):
+        self.handle_starttag(tag, attrs)
+
+def _html_text(value: str) -> str:
+    return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", value))).strip()
+
 
 def parse_meetings(text: str, source: dict) -> list[dict]:
-    parser=MeetingParser(source["url"]); parser.feed(text)
+    blocks = re.findall(r'<div\s+id="card-\d+".*?(?=<div\s+id="card-\d+"|\Z)', text, flags=re.I | re.S)
     seen=set(); out=[]
-    for item in parser.items:
-        key=item["link"]
-        if key not in seen: seen.add(key); out.append(normalize_item(item, source["category"]))
+    for block in blocks:
+        title_match = re.search(r'class="[^"]*card-title[^"]*".*?<a[^>]+href="([^"]+)"[^>]*>(.*?)</a>', block, flags=re.I|re.S)
+        if not title_match: continue
+        date_match = re.search(r'card-date-text[^>]*>(.*?)</', block, flags=re.I|re.S)
+        type_match = re.search(r'card-type[^>]*>(.*?)</', block, flags=re.I|re.S)
+        details = [_html_text(x) for x in re.findall(r'card-detail-text[^>]*>(.*?)</', block, flags=re.I|re.S)]
+        ical = re.search(r'href="([^"]*ical-export[^"]*)"', block, flags=re.I)
+        raw = {
+            "title": _html_text(title_match.group(2)), "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
+            "link": urljoin(source["url"], title_match.group(1)), "published": "", "source": source["name"],
+            "event_date_raw": _html_text(date_match.group(1)) if date_match else "",
+            "event_type": _html_text(type_match.group(1)) if type_match else "",
+            "event_time": details[0] if details else "", "event_location": details[1] if len(details) > 1 else "",
+            "calendar_link": urljoin(source["url"], ical.group(1)) if ical else ""
+        }
+        item = normalize_item(raw, source["category"], source["source_type"])
+        if item["link"] not in seen: seen.add(item["link"]); out.append(item)
     return out
 
 def dedupe(items: list[dict]) -> list[dict]:
@@ -103,19 +188,22 @@ def collect() -> tuple[list[dict], list[str]]:
     return dedupe(items), errors
 
 def update_queue(items: list[dict]) -> dict:
-    old=read_json(QUEUE); existing={x["id"]:x for x in old.get("items",[])}
-    for item in items:
-        # Keep approved and pending candidates in the durable queue. The
-        # publication merge below is the single gate that exposes approved data.
-        existing[item["id"]] = item
-    old["items"]=list(existing.values())
-    old["updated_at"]=datetime.now(timezone.utc).isoformat()
-    write_json(QUEUE, old); return old
+    old = read_json(QUEUE)
+    fresh = {item["id"]: item for item in items}
+    # Retain a pending review item until it is explicitly approved or rejected;
+    # discard stale approved candidates from the current feed. Historical
+    # editions will later live in the archive, not the active queue.
+    for item in old.get("items", []):
+        if item.get("approval_status") == "pending" and item["id"] not in fresh:
+            fresh[item["id"]] = item
+    old["items"] = list(fresh.values())
+    old["updated_at"] = datetime.now(timezone.utc).isoformat()
+    write_json(QUEUE, old)
+    return old
 
 def merge_publication(current: dict, queue: dict) -> dict:
-    approved={x["id"]:x for x in current.get("items",[]) if x.get("approval_status")=="approved"}
-    approved.update({x["id"]:x for x in queue.get("items",[]) if x.get("approval_status")=="approved"})
-    items=sorted(approved.values(), key=lambda x:(x.get("date", ""), x.get("title", "")), reverse=True)[:100]
+    approved={x["id"]:x for x in queue.get("items",[]) if x.get("approval_status")=="approved" and x.get("id") != "welcome-001"}
+    items=sorted(approved.values(), key=lambda x:(x.get("event_date", x.get("date", "")), x.get("event_time", ""), x.get("title", "")), reverse=True)[:100]
     result=dict(current); result["items"]=items; result["updated_at"]=datetime.now(timezone.utc).isoformat()
     if items:
         lead = items[0]

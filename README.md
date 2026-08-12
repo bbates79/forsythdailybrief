@@ -31,7 +31,7 @@ python3 scripts/pipeline.py approve ITEM_ID
 python3 scripts/pipeline.py reject ITEM_ID
 ```
 
-`collect` refreshes `data/approval-queue.json`. Routine items are approved automatically; sensitive candidates remain `pending`. `publish` copies only records whose status is explicitly `approved` into `data/current.json`.
+`collect` refreshes `data/approval-queue.json`. Routine items are approved automatically; sensitive candidates remain `pending`. `publish` copies only records whose status is explicitly `approved` into `data/current.json`. Meeting records include their actual event date, time, location, meeting type, and iCal link when available.
 
 ## Local preview
 
