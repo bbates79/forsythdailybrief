@@ -281,7 +281,7 @@ def update_queue(items: list[dict]) -> dict:
     # discard stale approved candidates from the current feed. Historical
     # editions will later live in the archive, not the active queue.
     for item in old.get("items", []):
-        if item.get("approval_status") == "pending" and item["id"] not in fresh:
+        if item.get("id") not in fresh and (item.get("approval_status") == "pending" or item.get("article_path")):
             fresh[item["id"]] = item
     old["items"] = list(fresh.values())
     old["updated_at"] = datetime.now(timezone.utc).isoformat()
@@ -289,7 +289,7 @@ def update_queue(items: list[dict]) -> dict:
     return old
 
 def merge_publication(current: dict, queue: dict) -> dict:
-    approved={x["id"]:x for x in queue.get("items",[]) if x.get("approval_status")=="approved" and x.get("id") != "welcome-001"}
+    approved={x["id"]:x for x in queue.get("items",[]) if (x.get("approval_status")=="approved" or x.get("article_path")) and x.get("id") != "welcome-001"}
     items=sorted(approved.values(), key=lambda x:(x.get("event_date", x.get("date", "")), x.get("event_time", ""), x.get("title", "")), reverse=True)[:100]
     result=dict(current); result["items"]=items; result["updated_at"]=datetime.now(timezone.utc).isoformat()
     if items:
