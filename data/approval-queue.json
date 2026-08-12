@@ -369,6 +369,36 @@
       "date": "2026-08-12",
       "link": "https://www.forsythco.com/meetings/zoning-board-of-appeals-regular-meeting-public-hearings-2",
       "approval_status": "approved"
+    },
+    {
+      "id": "84fd301f7740a763",
+      "title": "Volleyball: Longhorns, Broncos pick up wins in tri-match",
+      "summary": "A tri-match at East Forsyth saw Lambert and the host Broncos finish 1-1.",
+      "source": "Forsyth County News",
+      "category": "local-news",
+      "date": "2026-08-12",
+      "link": "https://www.forsythnews.com/sports/volleyball/volleyball-longhorns-broncos-pick-up-wins-in-tri-match",
+      "approval_status": "approved"
+    },
+    {
+      "id": "e9a71dd6f6e06cea",
+      "title": "Basketball: North Forsyth grad Michael Akinrinmade inks to play collegiately",
+      "summary": "North Forsyth Class of 2026 member Michael Akinrinmade will be playing for a community college in Tennessee.",
+      "source": "Forsyth County News",
+      "category": "local-news",
+      "date": "2026-08-12",
+      "link": "https://www.forsythnews.com/sports/basketball/basketball-north-forsyth-grad-michael-akinrinmade-inks-play-collegiately",
+      "approval_status": "approved"
+    },
+    {
+      "id": "86956f24016b93ee",
+      "title": "Softball: Forsyth Central unable to hang with Peachtree Ridge",
+      "summary": "Forsyth Central couldn't overcome the injury bug during a non-region loss to Peachtree Ridge.",
+      "source": "Forsyth County News",
+      "category": "local-news",
+      "date": "2026-08-12",
+      "link": "https://www.forsythnews.com/sports/softball/softball-forsyth-central-unable-to-hang-with-peachtree-ridge",
+      "approval_status": "approved"
     }
   ],
   "workflow": {
@@ -395,5 +425,5 @@
       "held"
     ]
   },
-  "updated_at": "2026-08-12T02:26:56.242966+00:00"
+  "updated_at": "2026-08-12T04:38:35.565957+00:00"
 }
