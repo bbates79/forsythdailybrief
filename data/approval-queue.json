@@ -133,22 +133,6 @@
       "approval_status": "approved"
     },
     {
-      "id": "dcc3d692f60dfd0b",
-      "title": "Civil Service Board – Regular Meeting 10:00 AM",
-      "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
-      "source": "Forsyth County Meetings",
-      "source_type": "official",
-      "category": "government",
-      "date": "2026-08-13",
-      "link": "https://www.forsythco.com/meetings/civil-service-board-regular-meeting-1000-am-4",
-      "approval_status": "approved",
-      "event_date": "2026-08-13",
-      "event_time": "10:00 AM",
-      "event_location": "Forsyth County Juvenile Court Building",
-      "event_type": "Regular Meeting",
-      "calendar_link": "https://www.forsythco.com/juicebox-meetings/ical-export?meeting_id=3860"
-    },
-    {
       "id": "b88936ae84b7bdbd",
       "title": "Civil Service Board – Regular Meeting 10:00 AM",
       "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
@@ -163,6 +147,22 @@
       "event_location": "Forsyth County Juvenile Court Building",
       "event_type": "Regular Meeting",
       "calendar_link": "https://www.forsythco.com/juicebox-meetings/ical-export?meeting_id=3870"
+    },
+    {
+      "id": "dcc3d692f60dfd0b",
+      "title": "Civil Service Board – Regular Meeting 10:00 AM",
+      "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
+      "source": "Forsyth County Meetings",
+      "source_type": "official",
+      "category": "government",
+      "date": "2026-08-13",
+      "link": "https://www.forsythco.com/meetings/civil-service-board-regular-meeting-1000-am-4",
+      "approval_status": "approved",
+      "event_date": "2026-08-13",
+      "event_time": "10:00 AM",
+      "event_location": "Forsyth County Juvenile Court Building",
+      "event_type": "Regular Meeting",
+      "calendar_link": "https://www.forsythco.com/juicebox-meetings/ical-export?meeting_id=3860"
     },
     {
       "id": "96b04a34126e7200",
@@ -538,5 +538,5 @@
       "held"
     ]
   },
-  "updated_at": "2026-08-12T20:09:57.469231+00:00"
+  "updated_at": "2026-08-12T20:10:48.463014+00:00"
 }
