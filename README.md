@@ -51,6 +51,10 @@ python3 -m http.server 8000
 
 Then open `http://localhost:8000`.
 
+## About and editorial transparency
+
+The public [About page](about.html) explains the project’s purpose, source inventory, automation, human-review boundary, and editorial principles. The public site is designed to make source provenance visible rather than presenting automation as a substitute for reporting.
+
 ## Planned automation
 
 The project is intentionally compatible with the existing static-site/GitHub Actions hosting pattern used by the Conflict Timeline, but it is a separate repository and data set. The daily workflow fetches sources, deduplicates records, applies the approval gate, runs tests, and commits only verified changes.

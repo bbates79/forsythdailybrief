@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="How Forsyth Daily Brief is made, what it covers, and how human review fits into the process.">
+  <title>About · Forsyth Daily Brief</title>
+  <style>
+    :root { color-scheme: dark; --bg:#0b1012; --surface:#121a1d; --ink:#edf5f3; --muted:#9aaca9; --faint:#71817f; --line:#2a393c; --accent:#69d1bd; --gold:#f1c56b; }
+    [data-theme="light"] { color-scheme: light; --bg:#f3f7f5; --surface:#fff; --ink:#162321; --muted:#5c706b; --faint:#83918e; --line:#d8e5e0; --accent:#087b6d; --gold:#9a6800; }
+    * { box-sizing:border-box } body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.7 system-ui,-apple-system,"Segoe UI",sans-serif }
+    a { color:var(--accent) } .shell { max-width:850px; margin:auto; padding:35px 22px 75px }
+    .top { display:flex; justify-content:space-between; gap:15px; border-bottom:1px solid var(--line); padding-bottom:18px }
+    .brand { color:var(--ink); text-decoration:none; font-weight:780; letter-spacing:-.03em }.back { font-size:13px; text-decoration:none }
+    .eyebrow { margin-top:65px; color:var(--accent); font:700 11px ui-monospace,monospace; letter-spacing:.15em; text-transform:uppercase }
+    h1 { max-width:760px; margin:14px 0 20px; font-size:clamp(42px,8vw,76px); line-height:.95; letter-spacing:-.07em }
+    h2 { margin:45px 0 10px; font-size:25px; line-height:1.1; letter-spacing:-.04em } h3 { margin:28px 0 5px; font-size:18px }
+    .dek { max-width:700px; color:var(--muted); font-size:19px }.lead { font-weight:650; font-size:18px }
+    .card { margin:22px 0; padding:19px 21px; background:var(--surface); border:1px solid var(--line); border-radius:13px }
+    .label { color:var(--gold); font:700 11px ui-monospace,monospace; letter-spacing:.12em; text-transform:uppercase }
+    li { margin:8px 0 } .muted { color:var(--muted) } footer { margin-top:55px; border-top:1px solid var(--line); padding-top:20px; color:var(--faint); font-size:13px }
+    @media(max-width:650px){.shell{padding:24px 16px 55px}.eyebrow{margin-top:45px}}
+  </style>
+</head>
+<body>
+<main class="shell">
+  <div class="top"><a class="brand" href="./">Forsyth Daily Brief</a><a class="back" href="./">← Home</a></div>
+  <div class="eyebrow">About the project</div>
+  <h1>The Forsyth news you’d otherwise miss.</h1>
+  <p class="dek">Forsyth Daily Brief is an experiment in using software, public records, and carefully supervised AI to make local civic information easier to follow.</p>
+
+  <p class="lead">The goal is not to replace local journalism. It is to cover the public activity that is easy to miss: meetings, agendas, inspections, development activity, school notices, weather, water levels, videos, and changes around the county.</p>
+
+  <h2>What you’ll find here</h2>
+  <div class="card"><div class="label">Daily brief</div><p>A concise view of the most useful approved updates across Forsyth County, with direct links to original sources.</p></div>
+  <div class="card"><div class="label">What to watch</div><p>Upcoming county meetings, public hearings, school-board activity, deadlines, and other events that residents may want to follow.</p></div>
+  <div class="card"><div class="label">Around Forsyth</div><p>Public-record signals about businesses, development, parks, transportation, permits, and other changes in the community.</p></div>
+  <div class="card"><div class="label">Practical conditions</div><p>Current observations from WeatherSTEM, Lake Lanier’s USGS water-surface elevation, and eventually school, road, and emergency information.</p></div>
+  <div class="card"><div class="label">Government video</div><p>Videos from the Forsyth County Government YouTube channel are turned into short, source-linked article candidates so important announcements do not disappear into a video archive.</p></div>
+
+  <h2>How this is made</h2>
+  <p>The system uses source-specific Python adapters, public RSS and Atom feeds, public HTML pages, machine-readable government data, scheduled GitHub Actions, and a static website. The current source inventory includes official county and sheriff feeds, county meetings, the Forsyth County Government YouTube feed, WeatherSTEM stations, and USGS Lake Lanier data.</p>
+  <p>Future adapters will read agenda packets, public filings, development records, school notices, and meeting videos. The site will summarize and link to those sources; it will not republish full articles or pretend that a source says more than it does.</p>
+
+  <h2>Automation and human review</h2>
+  <p>Routine, structured information can be collected and published automatically after validation. That includes meeting listings, weather observations, water levels, official announcements, and other low-risk public notices.</p>
+  <p>Items involving crime, deaths, emergencies, allegations, elections, sensitive personal information, public-health incidents, or claims about what happened at a meeting go into a review queue. They are not supposed to appear publicly until explicitly approved.</p>
+  <p>AI may help draft summaries, but it is not treated as the source. Every item should retain a canonical source link, and published feature articles should identify when they include additional human reporting, such as a phone confirmation.</p>
+
+  <h2>Editorial principles</h2>
+  <ul>
+    <li><strong>Source first:</strong> link directly to the official record or original reporting.</li>
+    <li><strong>Open where possible:</strong> prefer sources readers can access without a subscription or login.</li>
+    <li><strong>Separate fact from interpretation:</strong> distinguish an inspection record, a phone call, and an editorial summary.</li>
+    <li><strong>Preserve uncertainty:</strong> provisional data, pending reviews, and unknown current status should be labeled.</li>
+    <li><strong>Correct openly:</strong> corrections and updates should be traceable to the relevant source.</li>
+    <li><strong>Respect original work:</strong> summarize and link rather than copy copyrighted articles, images, or transcripts.</li>
+  </ul>
+
+  <h2>Current status</h2>
+  <p class="muted">This is an early-stage independent project. The automation and source coverage are still expanding. Forsyth Daily Brief is not affiliated with Forsyth County Government, Forsyth County Schools, the Forsyth County Sheriff’s Office, the Georgia Department of Public Health, USGS, WeatherSTEM, or any news publisher.</p>
+
+  <footer>Forsyth Daily Brief · Built from public sources · <a href="https://github.com/bbates79/forsythdailybrief" target="_blank" rel="noopener">View the project source ↗</a></footer>
+</main>
+</body>
+</html>
