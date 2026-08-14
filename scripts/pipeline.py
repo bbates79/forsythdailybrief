@@ -320,6 +320,11 @@ def publish():
             article["article_html_path"] = article.get("article_html_path") or article["article_path"].replace(".md", ".html")
             result["articles"].append(article)
     write_json(CURRENT, result)
+    try:
+        from generate_daily import generate
+        generate(datetime.now(timezone.utc).date().isoformat())
+    except Exception as exc:
+        print(f"Daily edition generation failed: {exc}", file=sys.stderr)
 
 def main():
     parser=argparse.ArgumentParser(); parser.add_argument("command", choices=["collect","publish","weather","approve","reject"]); parser.add_argument("ids", nargs="*"); args=parser.parse_args()
