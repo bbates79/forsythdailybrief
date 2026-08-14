@@ -1,8 +1,8 @@
 {
   "status": "ok",
   "site": "02334400",
-  "level_ft": 1066.43,
-  "observed_at": "2026-08-13T21:15:00.000-04:00",
+  "level_ft": 1066.42,
+  "observed_at": "2026-08-14T10:15:00.000-04:00",
   "provisional": true,
   "variable": "Elevation of reservoir water surface above datum, ft",
   "source_url": "https://waterdata.usgs.gov/monitoring-location/USGS-02334400"
