@@ -156,6 +156,22 @@
       "reviewed_at": "2026-08-12T00:00:00Z",
       "reviewed_by": "site owner",
       "article_html_path": "articles/friends-cumming-grill-gets-u-grade-2026-08-04.html"
+    },
+    {
+      "id": "852bf1bb0d6949d7",
+      "title": "Forsyth County plans tennis and pickleball court improvements at three parks",
+      "summary": "Four new tennis courts are planned at Sawnee Mountain Park, while courts at Matt Community Park and Coal Mountain Park are scheduled for resurfacing. The county says some disruption is expected, but construction dates, costs, and closure schedules have not yet been published.",
+      "source": "Forsyth County Government video and park pages",
+      "source_type": "official",
+      "category": "parks-recreation",
+      "date": "2026-08-13",
+      "link": "https://www.forsythco.com/news/2026/08/from-new-roads-to-new-courts-this-weeks-work-session-highlights/",
+      "approval_status": "approved",
+      "review_reason": "original_local_article",
+      "article_path": "articles/forsyth-parks-tennis-pickleball-court-improvements.md",
+      "article_html_path": "articles/forsyth-parks-tennis-pickleball-court-improvements.html",
+      "reviewed_at": "2026-08-14T00:00:00Z",
+      "reviewed_by": "site owner"
     }
   ],
   "latest": [
@@ -187,27 +203,33 @@
       "approval_status": "approved"
     },
     {
-      "id": "6f2a803f00b307b7",
-      "title": "Discover Volunteer Opportunities at the Community Volunteer Fair",
-      "summary": "Meet Bill Bierschenk, a volunteer of the Respite Program with Forsyth County Senior Services, who spends a few hours every week engaging in fun activities with older adults in need of memory support. He shared that volunteering has ... The post Discover Volunteer Opportunities at the Community Volunteer Fair appeared first on Forsyth County .",
-      "source": "Forsyth County Government",
+      "id": "852bf1bb0d6949d7",
+      "title": "Forsyth County plans tennis and pickleball court improvements at three parks",
+      "summary": "Four new tennis courts are planned at Sawnee Mountain Park, while courts at Matt Community Park and Coal Mountain Park are scheduled for resurfacing. The county says some disruption is expected, but construction dates, costs, and closure schedules have not yet been published.",
+      "source": "Forsyth County Government video and park pages",
       "source_type": "official",
-      "category": "government",
+      "category": "parks-recreation",
       "date": "2026-08-13",
-      "link": "https://www.forsythco.com/news/2026/08/discover-volunteer-opportunities-at-the-community-volunteer-fair",
-      "approval_status": "approved"
+      "link": "https://www.forsythco.com/news/2026/08/from-new-roads-to-new-courts-this-weeks-work-session-highlights/",
+      "approval_status": "approved",
+      "review_reason": "original_local_article",
+      "article_path": "articles/forsyth-parks-tennis-pickleball-court-improvements.md",
+      "article_html_path": "articles/forsyth-parks-tennis-pickleball-court-improvements.html",
+      "reviewed_at": "2026-08-14T00:00:00Z",
+      "reviewed_by": "site owner"
     }
   ],
   "snapshot": {
-    "weather_temperature_f": 81.1,
-    "weather_observed_at": "2026-08-13 21:18:00",
-    "lake_lanier_ft": 1066.44,
-    "lake_lanier_observed_at": "2026-08-13T20:15:00.000-04:00",
+    "weather_temperature_f": 80.0,
+    "weather_observed_at": "2026-08-13 21:42:42",
+    "lake_lanier_ft": 1066.43,
+    "lake_lanier_observed_at": "2026-08-13T21:15:00.000-04:00",
     "lake_lanier_provisional": true
   },
-  "generated_at": "2026-08-14T01:18:16.504648+00:00",
+  "generated_at": "2026-08-14T01:42:58.466278+00:00",
   "sources": [
     "Forsyth County Government",
+    "Forsyth County Government video and park pages",
     "Forsyth County Meetings"
   ]
 }

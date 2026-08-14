@@ -533,6 +533,22 @@
       "full_report": "https://ga.healthinspections.us/_templates/87/food_2015/_report_full.cfm?fsimID=57545038&domainID=87&rtype=food_2015",
       "reviewed_at": "2026-08-12T00:00:00Z",
       "reviewed_by": "site owner"
+    },
+    {
+      "id": "852bf1bb0d6949d7",
+      "title": "Forsyth County plans tennis and pickleball court improvements at three parks",
+      "summary": "Four new tennis courts are planned at Sawnee Mountain Park, while courts at Matt Community Park and Coal Mountain Park are scheduled for resurfacing. The county says some disruption is expected, but construction dates, costs, and closure schedules have not yet been published.",
+      "source": "Forsyth County Government video and park pages",
+      "source_type": "official",
+      "category": "parks-recreation",
+      "date": "2026-08-13",
+      "link": "https://www.forsythco.com/news/2026/08/from-new-roads-to-new-courts-this-weeks-work-session-highlights/",
+      "approval_status": "approved",
+      "review_reason": "original_local_article",
+      "article_path": "articles/forsyth-parks-tennis-pickleball-court-improvements.md",
+      "article_html_path": "articles/forsyth-parks-tennis-pickleball-court-improvements.html",
+      "reviewed_at": "2026-08-14T00:00:00Z",
+      "reviewed_by": "site owner"
     }
   ],
   "workflow": {
