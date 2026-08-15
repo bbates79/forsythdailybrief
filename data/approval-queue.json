@@ -133,22 +133,6 @@
       "approval_status": "approved"
     },
     {
-      "id": "fc18f549edfc1b48",
-      "title": "TriPartite Meeting",
-      "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
-      "source": "Forsyth County Meetings",
-      "source_type": "official",
-      "category": "government",
-      "date": "2026-08-14",
-      "link": "https://www.forsythco.com/meetings/tripartite-meeting",
-      "approval_status": "approved",
-      "event_date": "2026-08-14",
-      "event_time": "10:00 AM",
-      "event_location": "Forsyth County Courthouse",
-      "event_type": "Regular Meeting",
-      "calendar_link": "https://www.forsythco.com/juicebox-meetings/ical-export?meeting_id=18956"
-    },
-    {
       "id": "c515934b5748e0f5",
       "title": "Planning Commission Work Session",
       "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
@@ -291,6 +275,22 @@
       "event_location": "Forsyth County Juvenile Court Building",
       "event_type": "Regular Meeting",
       "calendar_link": "https://www.forsythco.com/juicebox-meetings/ical-export?meeting_id=3869"
+    },
+    {
+      "id": "af7c0ed3a583068e",
+      "title": "Board of Commissioners Regular Meeting / Public Hearings",
+      "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
+      "source": "Forsyth County Meetings",
+      "source_type": "official",
+      "category": "government",
+      "date": "2026-09-17",
+      "link": "https://www.forsythco.com/meetings/board-of-commissioners-regular-meeting-public-hearings-5",
+      "approval_status": "approved",
+      "event_date": "2026-09-17",
+      "event_time": "5:00 PM",
+      "event_location": "Board of Commissioners Building",
+      "event_type": "Regular Meeting/Public Hearings",
+      "calendar_link": "https://www.forsythco.com/juicebox-meetings/ical-export?meeting_id=17568"
     },
     {
       "id": "c90e70dd7a551f1c",
@@ -575,5 +575,5 @@
       "held"
     ]
   },
-  "updated_at": "2026-08-14T14:28:52.693245+00:00"
+  "updated_at": "2026-08-15T11:01:19.631805+00:00"
 }
