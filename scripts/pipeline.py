@@ -2,7 +2,7 @@
 """Fetch, normalize, classify, queue, and publish FDB items."""
 from __future__ import annotations
 import argparse, hashlib, html, json, re, sys
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from email.utils import parsedate_to_datetime
 from html.parser import HTMLParser
 from pathlib import Path
@@ -22,7 +22,7 @@ SOURCES = [
     {"name":"Forsyth County Meetings", "url":"https://www.forsythco.com/government/forsyth-county-meetings/?view=upcoming", "category":"government", "source_type":"official", "kind":"meetings"},
     {"name":"Forsyth County Government YouTube", "url":"https://www.youtube.com/feeds/videos.xml?channel_id=UCpTkRB5ucY66KGtvsKQhRsw", "category":"government", "source_type":"official", "kind":"youtube"},
     {"name":"Forsyth County Schools News", "url":"https://www.forsyth.k12.ga.us/view-all-news", "category":"schools", "source_type":"official", "kind":"school_news"},
-    {"name":"Forsyth County Schools Calendar", "url":"https://www.forsyth.k12.ga.us/calendar", "category":"schools", "source_type":"official", "kind":"school_calendar"},
+    {"name":"Forsyth County Schools Calendar", "url":"https://www.forsyth.k12.ga.us/fs/calendar-manager/events.ics?calendar_ids=21", "public_url":"https://www.forsyth.k12.ga.us/calendar", "category":"schools", "source_type":"official", "kind":"school_calendar", "past_days":30, "future_days":365},
 ]
 REVIEW_TERMS = re.compile(r"\b(arrest|arrested|charged|shooting|death|dead|killed|missing|crash|fatal|victim|alleged|allegation|election|suicide|sexual assault|abuse)\b", re.I)
 WEATHER_STATIONS = [
@@ -38,7 +38,7 @@ USGS_LAKE_LEVEL_URL = "https://waterservices.usgs.gov/nwis/iv/?format=json&sites
 USGS_LAKE_SOURCE = "https://waterdata.usgs.gov/monitoring-location/USGS-02334400"
 
 def fetch(url: str) -> str:
-    req = Request(url, headers={"User-Agent": USER_AGENT, "Accept": "application/rss+xml, application/xml, text/html"})
+    req = Request(url, headers={"User-Agent": USER_AGENT, "Accept": "text/html, application/xhtml+xml, application/rss+xml, application/xml;q=0.9, */*;q=0.8"})
     with urlopen(req, timeout=30) as response:
         return response.read().decode("utf-8", errors="replace")
 
@@ -273,43 +273,67 @@ def parse_school_news(text: str, source: dict) -> list[dict]:
     return out
 
 def parse_school_calendar(text: str, source: dict) -> list[dict]:
-    """Parse the server-rendered portion of the official district calendar."""
+    """Parse the official unpaginated Finalsite iCalendar feed."""
+    # RFC 5545 continuation lines begin with whitespace.
+    unfolded=[]
+    for line in text.replace("\r\n", "\n").split("\n"):
+        if line.startswith((" ", "\t")) and unfolded:
+            unfolded[-1] += line[1:]
+        else:
+            unfolded.append(line)
+    blocks=[]; current=None
+    for line in unfolded:
+        if line == "BEGIN:VEVENT": current=[]
+        elif line == "END:VEVENT" and current is not None:
+            blocks.append(current); current=None
+        elif current is not None:
+            current.append(line)
+
+    def unescape(value: str) -> str:
+        return value.replace("\\n", " ").replace("\\N", " ").replace("\\,", ",").replace("\\;", ";").replace("\\\\", "\\")
+
+    def parse_start(name: str, value: str) -> tuple[datetime | None, bool]:
+        try:
+            if "VALUE=DATE" in name:
+                return datetime.strptime(value, "%Y%m%d"), True
+            return datetime.strptime(value.rstrip("Z"), "%Y%m%dT%H%M%S"), False
+        except ValueError:
+            return None, False
+
     out=[]; seen=set()
-    day_blocks = re.findall(r'<div\s+class="fsCalendarDaybox[^>]*>(.*?)(?=<div\s+class="fsCalendarDaybox|\Z)', text, flags=re.I | re.S)
-    for block in day_blocks:
-        date_match = re.search(r'<div\s+class="fsCalendarDate"\s+data-day="(\d+)"\s+data-year="(\d{4})"\s+data-month="(\d+)"', block, flags=re.I)
-        if not date_match:
+    today = datetime.now(timezone.utc).date()
+    earliest = today - timedelta(days=source.get("past_days", 100000))
+    latest = today + timedelta(days=source.get("future_days", 100000))
+    public_url = source.get("public_url", source["url"])
+    for lines in blocks:
+        fields={}
+        for line in lines:
+            if ":" not in line: continue
+            name, value = line.split(":", 1)
+            fields[name] = unescape(value)
+        uid = fields.get("UID", "").strip()
+        start_name = next((name for name in fields if name.startswith("DTSTART")), "")
+        start, all_day = parse_start(start_name, fields.get(start_name, ""))
+        if not uid or not start or uid in seen or not earliest <= start.date() <= latest:
             continue
-        day, year, zero_month = map(int, date_match.groups())
-        event_date = datetime(year, zero_month + 1, day).date().isoformat()
-        events = re.findall(r'<a\b[^>]*class="[^"]*fsCalendarEventLink[^"]*"[^>]*title="([^"]+)"[^>]*data-occur-id="([^"]+)"[^>]*>.*?</a>(.*?)(?=<a\b[^>]*class="[^"]*fsCalendarEventLink|</div>\s*</div>\s*</div>|\Z)', block, flags=re.I | re.S)
-        for raw_title, occur_id, details in events:
-            if occur_id in seen:
-                continue
-            seen.add(occur_id)
-            title = _html_text(raw_title)
-            start = re.search(r'<time\b[^>]*datetime="([^"]+)"[^>]*class="[^"]*fsStartTime', details, flags=re.I)
-            end = re.search(r'<time\b[^>]*datetime="([^"]+)"[^>]*class="[^"]*fsEndTime', details, flags=re.I)
-            all_day = bool(re.search(r'fsAllDayEvent', details, flags=re.I))
-            event_time = "All day" if all_day else ""
-            if start:
-                try:
-                    event_time = datetime.fromisoformat(start.group(1)).strftime("%-I:%M %p")
-                    if end:
-                        event_time += "–" + datetime.fromisoformat(end.group(1)).strftime("%-I:%M %p")
-                except ValueError:
-                    event_time = ""
-            event_id = occur_id.split("_", 1)[0]
-            item = normalize_item({
-                "title": title,
-                "summary": "District-wide event listed on the official Forsyth County Schools calendar.",
-                "link": f"{source['url']}?fdb_event={event_id}",
-                "published": event_date,
-                "source": source["name"],
-            }, source["category"], source["source_type"])
-            item.update({"event_date": event_date, "event_time": event_time, "event_location": "", "event_type": "School district calendar", "calendar_link": source["url"]})
-            item["date"] = event_date
-            out.append(item)
+        seen.add(uid)
+        end_name = next((name for name in fields if name.startswith("DTEND")), "")
+        end, _ = parse_start(end_name, fields.get(end_name, ""))
+        event_time = "All day" if all_day else start.strftime("%-I:%M %p")
+        if end and not all_day:
+            event_time += "–" + end.strftime("%-I:%M %p")
+        title = fields.get("SUMMARY", "").strip() or "School district calendar event"
+        separator = "&" if "?" in public_url else "?"
+        item = normalize_item({
+            "title": title,
+            "summary": fields.get("DESCRIPTION", "").strip() or "District-wide event listed on the official Forsyth County Schools calendar.",
+            "link": f"{public_url}{separator}fdb_event={uid}",
+            "published": start.date().isoformat(),
+            "source": source["name"],
+        }, source["category"], source["source_type"])
+        item.update({"event_date": start.date().isoformat(), "event_time": event_time, "event_location": fields.get("LOCATION", "").strip(), "event_type": "School district calendar", "calendar_link": public_url, "calendar_uid": uid, "all_day": all_day})
+        item["date"] = item["event_date"]
+        out.append(item)
     return out
 
 def dedupe(items: list[dict]) -> list[dict]:

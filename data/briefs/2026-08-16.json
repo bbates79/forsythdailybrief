@@ -2,24 +2,26 @@
   "schema_version": 1,
   "date": "2026-08-16",
   "status": "published",
-  "headline": "Board of Commissioners Regular Meeting / Public Hearings",
-  "intro": "Upcoming public meeting or hearing listed by Forsyth County.",
+  "headline": "Post Planning",
+  "intro": "District-wide event listed on the official Forsyth County Schools calendar.",
   "what_to_watch": [
     {
-      "id": "6076e67b7e0373f6",
+      "id": "70418b31c30f6e46",
       "title": "Board of Education Meeting",
       "summary": "District-wide event listed on the official Forsyth County Schools calendar.",
       "source": "Forsyth County Schools Calendar",
       "source_type": "official",
       "category": "schools",
       "date": "2026-08-18",
-      "link": "https://www.forsyth.k12.ga.us/calendar?fdb_event=5981197",
+      "link": "https://www.forsyth.k12.ga.us/calendar?fdb_event=b3f08268-1617-59c3-baa1-c2c2c4d2b5cf",
       "approval_status": "approved",
       "event_date": "2026-08-18",
       "event_time": "5:00 PM–6:00 PM",
-      "event_location": "",
+      "event_location": "1120 Dahlonega Hwy, Cumming, Georgia, United States",
       "event_type": "School district calendar",
-      "calendar_link": "https://www.forsyth.k12.ga.us/calendar"
+      "calendar_link": "https://www.forsyth.k12.ga.us/calendar",
+      "calendar_uid": "b3f08268-1617-59c3-baa1-c2c2c4d2b5cf",
+      "all_day": false
     },
     {
       "id": "c515934b5748e0f5",
@@ -176,12 +178,12 @@
   ],
   "latest": [],
   "snapshot": {
-    "weather_temperature_f": 79.6,
-    "weather_observed_at": "2026-08-15 22:55:28",
+    "weather_temperature_f": 79.4,
+    "weather_observed_at": "2026-08-15 23:05:39",
     "lake_lanier_ft": 1066.41,
     "lake_lanier_observed_at": "2026-08-15T22:15:00.000-04:00",
     "lake_lanier_provisional": true
   },
-  "generated_at": "2026-08-16T02:55:30.744958+00:00",
+  "generated_at": "2026-08-16T03:05:43.114492+00:00",
   "sources": []
 }

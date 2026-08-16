@@ -24,13 +24,21 @@ SCHOOL_NEWS_FIXTURE = '''
 '''
 
 SCHOOL_CALENDAR_FIXTURE = '''
-<div class="fsCalendarDaybox fsStateHasEvents">
-  <div class="fsCalendarDate" data-day="18" data-year="2026" data-month="7">August 18</div>
-  <div class="fsCalendarInfo fsCalendarEvent">
-    <a class="fsCalendarTitle fsCalendarEventLink" title="Board of Education Meeting" data-occur-id="5981197_2026-08-18T21:00:00Z_2026-08-18T22:00:00Z" href="#">Board of Education Meeting</a>
-    <div class="fsTimeRange"><time datetime="2026-08-18T17:00:00-04:00" class="fsStartTime">5 PM</time><time datetime="2026-08-18T18:00:00-04:00" class="fsEndTime">6 PM</time></div>
-  </div>
-</div>
+BEGIN:VCALENDAR
+BEGIN:VEVENT
+UID:meeting-5981197
+DTSTART;TZID=America/New\\_York:20260818T170000
+DTEND;TZID=America/New\\_York:20260818T180000
+LOCATION:1120 Dahlonega Hwy\\, Cumming\\, Georgia
+SUMMARY:Board of Education Meeting
+END:VEVENT
+BEGIN:VEVENT
+UID:early-release-1
+DTSTART;VALUE=DATE:20260904
+DTEND;VALUE=DATE:20260905
+SUMMARY:All Grades (K-12) Early Release
+END:VEVENT
+END:VCALENDAR
 '''
 
 def test_sensitive_story_requires_approval():
@@ -94,11 +102,16 @@ def test_school_news_parser_preserves_distinct_official_card():
 def test_school_calendar_parser_preserves_event_metadata():
     source={"name":"Forsyth County Schools Calendar","url":"https://www.forsyth.k12.ga.us/calendar","category":"schools","source_type":"official"}
     items=parse_school_calendar(SCHOOL_CALENDAR_FIXTURE, source)
-    assert len(items) == 1
+    assert len(items) == 2
     assert items[0]["title"] == "Board of Education Meeting"
     assert items[0]["event_date"] == "2026-08-18"
     assert items[0]["event_time"] == "5:00 PM–6:00 PM"
     assert items[0]["event_type"] == "School district calendar"
+    assert items[0]["event_location"] == "1120 Dahlonega Hwy, Cumming, Georgia"
+    assert items[0]["calendar_uid"] == "meeting-5981197"
+    assert items[0]["all_day"] is False
+    assert items[1]["event_time"] == "All day"
+    assert items[1]["all_day"] is True
 
 def test_update_queue_drops_stale_approved_items(tmp_path, monkeypatch):
     import pipeline

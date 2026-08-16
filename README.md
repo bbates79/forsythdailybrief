@@ -17,7 +17,7 @@ The source adapters collect official county and sheriff feeds, upcoming county m
 ## Source inventory
 
 - Forsyth County Government and meeting calendar
-- Forsyth County Schools district news and district calendar
+- Forsyth County Schools district news and official iCalendar feed
 - Forsyth County Sheriff's Office
 - Forsyth County Government YouTube channel via its public Atom feed; videos become source-linked article candidates
 - 11Alive Atlanta, filtered to Forsyth/Cumming mentions
