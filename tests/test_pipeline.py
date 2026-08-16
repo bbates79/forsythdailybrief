@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).parents[1] / "scripts"))
-from pipeline import classify, dedupe, normalize_item, merge_publication, parse_meetings, filter_source_items, parse_youtube
+from pipeline import classify, dedupe, normalize_item, merge_publication, parse_meetings, filter_source_items, parse_youtube, parse_school_news, parse_school_calendar
 
 MEETING_FIXTURE = '''
 <div id="card-3860" class="board-meetings-list__card">
@@ -14,6 +14,23 @@ MEETING_FIXTURE = '''
   <a href="https://www.forsythco.com/juicebox-meetings/ical-export?meeting_id=3860">Outlook / iCal</a>
 </div>
 <a href="https://www.forsythco.com/government/forsyth-county-meetings/?view=upcoming">Upcoming Meetings</a>
+'''
+
+SCHOOL_NEWS_FIXTURE = '''
+<article class="fsBoard-829" data-post-id="6842">
+  <div class="fsTitle"><a class="fsPostLink" href="/district-services/communications/press-release">FORSYTH COUNTY SCHOOLS ACHIEVES TOP MILESTONES RANKINGS</a></div>
+  <time datetime="2026-08-11T10:08:00-04:00" class="fsDate">Aug 11 2026</time>
+</article>
+'''
+
+SCHOOL_CALENDAR_FIXTURE = '''
+<div class="fsCalendarDaybox fsStateHasEvents">
+  <div class="fsCalendarDate" data-day="18" data-year="2026" data-month="7">August 18</div>
+  <div class="fsCalendarInfo fsCalendarEvent">
+    <a class="fsCalendarTitle fsCalendarEventLink" title="Board of Education Meeting" data-occur-id="5981197_2026-08-18T21:00:00Z_2026-08-18T22:00:00Z" href="#">Board of Education Meeting</a>
+    <div class="fsTimeRange"><time datetime="2026-08-18T17:00:00-04:00" class="fsStartTime">5 PM</time><time datetime="2026-08-18T18:00:00-04:00" class="fsEndTime">6 PM</time></div>
+  </div>
+</div>
 '''
 
 def test_sensitive_story_requires_approval():
@@ -64,6 +81,24 @@ def test_stale_approved_items_are_not_reintroduced():
 def test_school_category():
     item = normalize_item({"title":"School calendar update", "summary":"District schedule", "link":"https://example.test/d", "source":"Forsyth County Schools"}, "schools", source_type="official")
     assert item["category"] == "schools"
+
+def test_school_news_parser_preserves_distinct_official_card():
+    source={"name":"Forsyth County Schools News","url":"https://www.forsyth.k12.ga.us/view-all-news","category":"schools","source_type":"official"}
+    items=parse_school_news(SCHOOL_NEWS_FIXTURE, source)
+    assert len(items) == 1
+    assert items[0]["category"] == "schools"
+    assert items[0]["date"] == "2026-08-11"
+    assert "fdb_post=6842" in items[0]["link"]
+    assert items[0]["approval_status"] == "approved"
+
+def test_school_calendar_parser_preserves_event_metadata():
+    source={"name":"Forsyth County Schools Calendar","url":"https://www.forsyth.k12.ga.us/calendar","category":"schools","source_type":"official"}
+    items=parse_school_calendar(SCHOOL_CALENDAR_FIXTURE, source)
+    assert len(items) == 1
+    assert items[0]["title"] == "Board of Education Meeting"
+    assert items[0]["event_date"] == "2026-08-18"
+    assert items[0]["event_time"] == "5:00 PM–6:00 PM"
+    assert items[0]["event_type"] == "School district calendar"
 
 def test_update_queue_drops_stale_approved_items(tmp_path, monkeypatch):
     import pipeline

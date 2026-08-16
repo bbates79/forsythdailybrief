@@ -4,7 +4,7 @@ A source-linked, mostly autonomous local briefing for Forsyth County, Georgia.
 
 ## Current state
 
-The first source adapters now collect RSS feeds from Forsyth County Government, the Sheriff's Office, and Forsyth County News, plus upcoming county meetings. The homepage publishes approved items only.
+The source adapters collect official county and sheriff feeds, upcoming county meetings, government videos, open regional reporting, Forsyth County Schools district news and calendar events, WeatherSTEM observations, and the Lake Lanier level. The homepage publishes approved items only.
 
 ## Editorial workflow
 
@@ -17,7 +17,7 @@ The first source adapters now collect RSS feeds from Forsyth County Government, 
 ## Source inventory
 
 - Forsyth County Government and meeting calendar
-- Forsyth County Schools and district calendar
+- Forsyth County Schools district news and district calendar
 - Forsyth County Sheriff's Office
 - Forsyth County Government YouTube channel via its public Atom feed; videos become source-linked article candidates
 - 11Alive Atlanta, filtered to Forsyth/Cumming mentions
@@ -59,7 +59,7 @@ The public [About page](about.html) explains the project’s purpose, source inv
 
 The project is intentionally compatible with the existing static-site/GitHub Actions hosting pattern used by the Conflict Timeline, but it is a separate repository and data set. The daily workflow fetches sources, deduplicates records, applies the approval gate, runs tests, and commits only verified changes.
 
-Proposed domain: `forsythdailybrief.com`.
+Live domain: `forsythdaily.com`.
 
 ## Disclaimer
 

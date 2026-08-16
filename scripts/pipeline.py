@@ -21,6 +21,8 @@ SOURCES = [
     {"name":"AccessWDUN / Access North Georgia", "url":"https://accessnorthga.com/feed", "category":"local-news", "source_type":"local-reporting", "kind":"rss", "include_terms":["forsyth", "cumming"]},
     {"name":"Forsyth County Meetings", "url":"https://www.forsythco.com/government/forsyth-county-meetings/?view=upcoming", "category":"government", "source_type":"official", "kind":"meetings"},
     {"name":"Forsyth County Government YouTube", "url":"https://www.youtube.com/feeds/videos.xml?channel_id=UCpTkRB5ucY66KGtvsKQhRsw", "category":"government", "source_type":"official", "kind":"youtube"},
+    {"name":"Forsyth County Schools News", "url":"https://www.forsyth.k12.ga.us/view-all-news", "category":"schools", "source_type":"official", "kind":"school_news"},
+    {"name":"Forsyth County Schools Calendar", "url":"https://www.forsyth.k12.ga.us/calendar", "category":"schools", "source_type":"official", "kind":"school_calendar"},
 ]
 REVIEW_TERMS = re.compile(r"\b(arrest|arrested|charged|shooting|death|dead|killed|missing|crash|fatal|victim|alleged|allegation|election|suicide|sexual assault|abuse)\b", re.I)
 WEATHER_STATIONS = [
@@ -248,6 +250,68 @@ def parse_meetings(text: str, source: dict) -> list[dict]:
         if item["link"] not in seen: seen.add(item["link"]); out.append(item)
     return out
 
+def parse_school_news(text: str, source: dict) -> list[dict]:
+    """Parse official Finalsite district-news cards without relying on JS."""
+    out=[]
+    blocks = re.findall(r'<article\b[^>]*data-post-id="([^"]+)"[^>]*>(.*?)</article>', text, flags=re.I | re.S)
+    for post_id, block in blocks:
+        title_match = re.search(r'<div\b[^>]*class="[^"]*fsTitle[^"]*"[^>]*>.*?<a\b[^>]*href="([^"]+)"[^>]*>(.*?)</a>', block, flags=re.I | re.S)
+        date_match = re.search(r'<time\b[^>]*datetime="([^"]+)"[^>]*class="[^"]*fsDate', block, flags=re.I | re.S)
+        if not title_match or not date_match:
+            continue
+        title = _html_text(title_match.group(2))
+        href = urljoin(source["url"], html.unescape(title_match.group(1)))
+        separator = "&" if "?" in href else "?"
+        link = f"{href}{separator}fdb_post={post_id}"
+        out.append(normalize_item({
+            "title": title,
+            "summary": "Official announcement from Forsyth County Schools. Open the district source for details.",
+            "link": link,
+            "published": date_match.group(1),
+            "source": source["name"],
+        }, source["category"], source["source_type"]))
+    return out
+
+def parse_school_calendar(text: str, source: dict) -> list[dict]:
+    """Parse the server-rendered portion of the official district calendar."""
+    out=[]; seen=set()
+    day_blocks = re.findall(r'<div\s+class="fsCalendarDaybox[^>]*>(.*?)(?=<div\s+class="fsCalendarDaybox|\Z)', text, flags=re.I | re.S)
+    for block in day_blocks:
+        date_match = re.search(r'<div\s+class="fsCalendarDate"\s+data-day="(\d+)"\s+data-year="(\d{4})"\s+data-month="(\d+)"', block, flags=re.I)
+        if not date_match:
+            continue
+        day, year, zero_month = map(int, date_match.groups())
+        event_date = datetime(year, zero_month + 1, day).date().isoformat()
+        events = re.findall(r'<a\b[^>]*class="[^"]*fsCalendarEventLink[^"]*"[^>]*title="([^"]+)"[^>]*data-occur-id="([^"]+)"[^>]*>.*?</a>(.*?)(?=<a\b[^>]*class="[^"]*fsCalendarEventLink|</div>\s*</div>\s*</div>|\Z)', block, flags=re.I | re.S)
+        for raw_title, occur_id, details in events:
+            if occur_id in seen:
+                continue
+            seen.add(occur_id)
+            title = _html_text(raw_title)
+            start = re.search(r'<time\b[^>]*datetime="([^"]+)"[^>]*class="[^"]*fsStartTime', details, flags=re.I)
+            end = re.search(r'<time\b[^>]*datetime="([^"]+)"[^>]*class="[^"]*fsEndTime', details, flags=re.I)
+            all_day = bool(re.search(r'fsAllDayEvent', details, flags=re.I))
+            event_time = "All day" if all_day else ""
+            if start:
+                try:
+                    event_time = datetime.fromisoformat(start.group(1)).strftime("%-I:%M %p")
+                    if end:
+                        event_time += "–" + datetime.fromisoformat(end.group(1)).strftime("%-I:%M %p")
+                except ValueError:
+                    event_time = ""
+            event_id = occur_id.split("_", 1)[0]
+            item = normalize_item({
+                "title": title,
+                "summary": "District-wide event listed on the official Forsyth County Schools calendar.",
+                "link": f"{source['url']}?fdb_event={event_id}",
+                "published": event_date,
+                "source": source["name"],
+            }, source["category"], source["source_type"])
+            item.update({"event_date": event_date, "event_time": event_time, "event_location": "", "event_type": "School district calendar", "calendar_link": source["url"]})
+            item["date"] = event_date
+            out.append(item)
+    return out
+
 def dedupe(items: list[dict]) -> list[dict]:
     out=[]; seen=set()
     for item in items:
@@ -265,6 +329,10 @@ def collect() -> tuple[list[dict], list[str]]:
                 parsed=parse_rss(fetch(source["url"]), source)
             elif source["kind"] == "youtube":
                 parsed=parse_youtube(fetch(source["url"]), source)
+            elif source["kind"] == "school_news":
+                parsed=parse_school_news(fetch(source["url"]), source)
+            elif source["kind"] == "school_calendar":
+                parsed=parse_school_calendar(fetch(source["url"]), source)
             else:
                 parsed=parse_meetings(fetch(source["url"]), source)
             parsed=filter_source_items(parsed, source)
@@ -301,7 +369,7 @@ def refresh_facts(result: dict, items: list[dict]) -> dict:
     categories = {item.get("category") for item in items}
     result["facts"] = {
         "meetings": f"{sum(item.get('category') == 'government' for item in items)} government and meeting updates are currently published.",
-        "schools": "School-specific adapters are planned next; district links remain in the source inventory.",
+        "schools": f"{sum(item.get('category') == 'schools' for item in items)} official school updates and district events are currently published.",
         "sources": f"{len(categories)} source categories are represented in the current brief."
     }
     return result
@@ -343,7 +411,7 @@ def main():
 
 if __name__ == "__main__": main()
 
-__all__=["classify","dedupe","normalize_item","merge_publication","filter_source_items","WEATHER_STATIONS","parse_weatherstem","aggregate_weather","parse_usgs_lake_level","empty_lake_level","parse_youtube"]
+__all__=["classify","dedupe","normalize_item","merge_publication","filter_source_items","WEATHER_STATIONS","parse_weatherstem","aggregate_weather","parse_usgs_lake_level","empty_lake_level","parse_youtube","parse_school_news","parse_school_calendar"]
 
 def _self_check():
     assert clean_url("https://example.test/a?utm_source=x") == "https://example.test/a"
