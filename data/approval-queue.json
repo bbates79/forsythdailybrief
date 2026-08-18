@@ -293,6 +293,20 @@
       "calendar_link": "https://www.forsythco.com/juicebox-meetings/ical-export?meeting_id=17568"
     },
     {
+      "id": "3953c871bf4e46fb",
+      "title": "Find Your Way to Give Back | Forsyth County Volunteer Fair",
+      "summary": "Meet Bill Bierschenk, a volunteer of the Respite Program with Forsyth County Senior Services, who spends a few hours every week engaging in fun activities with older adults in need of memory support.",
+      "source": "Forsyth County Government YouTube",
+      "source_type": "official",
+      "category": "government",
+      "date": "2026-08-17",
+      "link": "https://www.youtube.com/watch?v=M2eXC3N_btI",
+      "approval_status": "approved",
+      "content_type": "video",
+      "video_id": "M2eXC3N_btI",
+      "thumbnail": "https://i.ytimg.com/vi/M2eXC3N_btI/hqdefault.jpg"
+    },
+    {
       "id": "c90e70dd7a551f1c",
       "title": "Ribbon Cutting Ceremony Held for Forsyth County Water Treatment Plant Upgrades",
       "summary": "Forsyth County officials held a ribbon cutting ceremony on Friday, June 12, for a recent expansion at the Forsyth County Water Treatment Plant (2255 Antioch Road) in north Forsyth. The expansion at the facility increased the peak water treatment capacity from 33 million gallons per day (MGD) to 40 MGD.",
@@ -487,20 +501,6 @@
       "content_type": "video",
       "video_id": "T-I-J5hpYrA",
       "thumbnail": "https://i.ytimg.com/vi/T-I-J5hpYrA/hqdefault.jpg"
-    },
-    {
-      "id": "b369708410d88cff",
-      "title": "Decades of Dedication: Inside Cindy Henderson’s 41 Years with Forsyth County",
-      "summary": "Assistant to the County Manager Cindy Henderson has seen Forsyth County grow and innovate over the past four decades. From starting her career on a typewriter to today's advanced technology, Cindy has been part of the County's evolution every step of the way.",
-      "source": "Forsyth County Government YouTube",
-      "source_type": "official",
-      "category": "government",
-      "date": "2026-02-25",
-      "link": "https://www.youtube.com/watch?v=0RR_GRr8Oes",
-      "approval_status": "approved",
-      "content_type": "video",
-      "video_id": "0RR_GRr8Oes",
-      "thumbnail": "https://i.ytimg.com/vi/0RR_GRr8Oes/hqdefault.jpg"
     },
     {
       "id": "9858f2345ae6f4c6",
@@ -1238,5 +1238,5 @@
       "held"
     ]
   },
-  "updated_at": "2026-08-17T11:45:21.095690+00:00"
+  "updated_at": "2026-08-18T11:46:28.356645+00:00"
 }

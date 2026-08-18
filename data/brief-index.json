@@ -2,6 +2,13 @@
   "schema_version": 1,
   "editions": [
     {
+      "date": "2026-08-18",
+      "path": "briefs/2026-08-18.html",
+      "headline": "Post Planning",
+      "item_count": 0,
+      "source_count": 0
+    },
+    {
       "date": "2026-08-17",
       "path": "briefs/2026-08-17.html",
       "headline": "Post Planning",
