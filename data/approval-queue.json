@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "630880747a36def6",
+      "title": "Age Well Donates Storage Sheds to Support Programs for Seniors in Need",
+      "summary": "We would like to thank Age Well Forsyth for donating two new 12 ft x 20 ft storage sheds to our Central Park Senior Recreation and Services location! These sheds will help us safely store donated items that ... The post Age Well Donates Storage Sheds to Support Programs for Seniors in Need appeared first on Forsyth County .",
+      "source": "Forsyth County Government",
+      "source_type": "official",
+      "category": "government",
+      "date": "2026-08-18",
+      "link": "https://www.forsythco.com/news/2026/08/age-well-donates-storage-sheds-to-support-programs-for-seniors-in-need",
+      "approval_status": "approved"
+    },
+    {
       "id": "6f2a803f00b307b7",
       "title": "Discover Volunteer Opportunities at the Community Volunteer Fair",
       "summary": "Meet Bill Bierschenk, a volunteer of the Respite Program with Forsyth County Senior Services, who spends a few hours every week engaging in fun activities with older adults in need of memory support. He shared that volunteering has ... The post Discover Volunteer Opportunities at the Community Volunteer Fair appeared first on Forsyth County .",
@@ -100,17 +111,6 @@
       "approval_status": "approved"
     },
     {
-      "id": "3bb08c53727851f5",
-      "title": "Read the Latest Your Forsyth Newsletter",
-      "summary": "In this month’s Your Forsyth newsletter, learn about Forsyth County’s intent to adopt the rollback millage rate, see the latest progress on construction of the new Water Intake facility on Lake Lanier, check out the Fall Activity Guide ... The post Read the Latest Your Forsyth Newsletter appeared first on Forsyth County .",
-      "source": "Forsyth County Government",
-      "source_type": "official",
-      "category": "government",
-      "date": "2026-08-05",
-      "link": "https://www.forsythco.com/news/2026/08/read-the-latest-forsyth-newsletter",
-      "approval_status": "approved"
-    },
-    {
       "id": "08bb8de9b6406d3e",
       "title": "New Podcast Launched: Up In Cumming with Sheriff Ron Freeman",
       "summary": "A brand-new podcast featuring casual conversations with Sheriff Freeman and a variety of special guests from across Forsyth County. The post New Podcast Launched: Up In Cumming with Sheriff Ron Freeman appeared first on Forsyth County Sheriff's Office .",
@@ -131,22 +131,6 @@
       "date": "2026-05-03",
       "link": "https://www.forsythsheriff.org/news/2026/05/corporate-swat-challenge",
       "approval_status": "approved"
-    },
-    {
-      "id": "c515934b5748e0f5",
-      "title": "Planning Commission Work Session",
-      "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
-      "source": "Forsyth County Meetings",
-      "source_type": "official",
-      "category": "government",
-      "date": "2026-08-18",
-      "link": "https://www.forsythco.com/meetings/planning-commission-work-session-3",
-      "approval_status": "approved",
-      "event_date": "2026-08-18",
-      "event_time": "6:30 PM",
-      "event_location": "Board of Commissioners Building",
-      "event_type": "Work Session",
-      "calendar_link": "https://www.forsythco.com/juicebox-meetings/ical-export?meeting_id=18814"
     },
     {
       "id": "0472d5b2d942b609",
@@ -291,6 +275,22 @@
       "event_location": "Board of Commissioners Building",
       "event_type": "Regular Meeting/Public Hearings",
       "calendar_link": "https://www.forsythco.com/juicebox-meetings/ical-export?meeting_id=17568"
+    },
+    {
+      "id": "ee5dbf2d74b540b9",
+      "title": "Board of Commissioners Work Session Meeting",
+      "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
+      "source": "Forsyth County Meetings",
+      "source_type": "official",
+      "category": "government",
+      "date": "2026-09-22",
+      "link": "https://www.forsythco.com/meetings/board-of-commissioners-work-session-meeting-6",
+      "approval_status": "approved",
+      "event_date": "2026-09-22",
+      "event_time": "2:00 PM",
+      "event_location": "Board of Commissioners Building",
+      "event_type": "Work Session",
+      "calendar_link": "https://www.forsythco.com/juicebox-meetings/ical-export?meeting_id=17569"
     },
     {
       "id": "3953c871bf4e46fb",
@@ -1238,5 +1238,5 @@
       "held"
     ]
   },
-  "updated_at": "2026-08-18T11:46:28.356645+00:00"
+  "updated_at": "2026-08-19T11:45:18.469084+00:00"
 }
