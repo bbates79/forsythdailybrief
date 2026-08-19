@@ -178,12 +178,12 @@
   ],
   "latest": [],
   "snapshot": {
-    "weather_temperature_f": 89.2,
-    "weather_observed_at": "2026-08-19 18:26:02",
-    "lake_lanier_ft": 1066.28,
-    "lake_lanier_observed_at": "2026-08-19T17:15:00.000-04:00",
+    "weather_temperature_f": 89.1,
+    "weather_observed_at": "2026-08-19 18:27:43",
+    "lake_lanier_ft": 1066.27,
+    "lake_lanier_observed_at": "2026-08-19T18:15:00.000-04:00",
     "lake_lanier_provisional": true
   },
-  "generated_at": "2026-08-19T22:26:07.658712+00:00",
+  "generated_at": "2026-08-19T22:27:45.788732+00:00",
   "sources": []
 }
