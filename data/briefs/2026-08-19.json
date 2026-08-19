@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-08-19",
   "status": "published",
-  "headline": "Post Planning",
-  "intro": "District-wide event listed on the official Forsyth County Schools calendar.",
+  "headline": "Forsyth County Approves Precinct and Polling Place Changes",
+  "intro": "The Forsyth County Board of Voter Registrations & Elections and the Forsyth County Board of Commissioners have approved voting precinct line and polling place changes that will be effective with the November 2026 elections. The changes will impact ... The post Forsyth County Approves Precinct and Polling Place Changes appeared first on Forsyth County .",
   "what_to_watch": [
     {
       "id": "0472d5b2d942b609",
@@ -86,6 +86,22 @@
       "calendar_link": "https://www.forsythco.com/juicebox-meetings/ical-export?meeting_id=18849"
     },
     {
+      "id": "988225268df2ea2b",
+      "title": "Parks & Recreation Board Meeting",
+      "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
+      "source": "Forsyth County Meetings",
+      "source_type": "official",
+      "category": "government",
+      "date": "2026-09-02",
+      "link": "https://www.forsythco.com/meetings/19317",
+      "approval_status": "approved",
+      "event_date": "2026-09-02",
+      "event_time": "6:30 PM",
+      "event_location": "",
+      "event_type": "",
+      "calendar_link": "https://www.forsythco.com/juicebox-meetings/ical-export?meeting_id=19317"
+    },
+    {
       "id": "612345241aabd343",
       "title": "Board of Commissioners Regular Meeting / Public Hearings",
       "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
@@ -117,24 +133,6 @@
       "event_type": "School district calendar",
       "calendar_link": "https://www.forsyth.k12.ga.us/calendar",
       "calendar_uid": "6152a93c-872e-5d80-9209-efd014af4512",
-      "all_day": true
-    },
-    {
-      "id": "080fec5c5b0d7745",
-      "title": "Labor Day - Student/Staff Holidays",
-      "summary": "District-wide event listed on the official Forsyth County Schools calendar.",
-      "source": "Forsyth County Schools Calendar",
-      "source_type": "official",
-      "category": "schools",
-      "date": "2026-09-07",
-      "link": "https://www.forsyth.k12.ga.us/calendar?fdb_event=0e049c44-afab-580d-820f-d61472627ea7",
-      "approval_status": "approved",
-      "event_date": "2026-09-07",
-      "event_time": "All day",
-      "event_location": "",
-      "event_type": "School district calendar",
-      "calendar_link": "https://www.forsyth.k12.ga.us/calendar",
-      "calendar_uid": "0e049c44-afab-580d-820f-d61472627ea7",
       "all_day": true
     }
   ],
@@ -180,12 +178,12 @@
   ],
   "latest": [],
   "snapshot": {
-    "weather_temperature_f": 68.0,
-    "weather_observed_at": "2026-08-19 07:45:31",
-    "lake_lanier_ft": 1066.3,
-    "lake_lanier_observed_at": "2026-08-19T07:15:00.000-04:00",
+    "weather_temperature_f": 89.2,
+    "weather_observed_at": "2026-08-19 18:26:02",
+    "lake_lanier_ft": 1066.28,
+    "lake_lanier_observed_at": "2026-08-19T17:15:00.000-04:00",
     "lake_lanier_provisional": true
   },
-  "generated_at": "2026-08-19T11:45:35.130346+00:00",
+  "generated_at": "2026-08-19T22:26:07.658712+00:00",
   "sources": []
 }

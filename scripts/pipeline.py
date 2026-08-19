@@ -22,7 +22,7 @@ SOURCES = [
     {"name":"Forsyth County Meetings", "url":"https://www.forsythco.com/government/forsyth-county-meetings/?view=upcoming", "category":"government", "source_type":"official", "kind":"meetings"},
     {"name":"Forsyth County Government YouTube", "url":"https://www.youtube.com/feeds/videos.xml?channel_id=UCpTkRB5ucY66KGtvsKQhRsw", "category":"government", "source_type":"official", "kind":"youtube"},
     {"name":"Forsyth County Schools News", "url":"https://www.forsyth.k12.ga.us/view-all-news", "category":"schools", "source_type":"official", "kind":"school_news"},
-    {"name":"Forsyth County Schools Calendar", "url":"https://www.forsyth.k12.ga.us/fs/calendar-manager/events.ics?calendar_ids=21", "public_url":"https://www.forsyth.k12.ga.us/calendar", "category":"schools", "source_type":"official", "kind":"school_calendar", "past_days":30, "future_days":365},
+    {"name":"Forsyth County Schools Calendar", "url":"https://www.forsyth.k12.ga.us/fs/calendar-manager/events.ics?calendar_ids=21", "public_url":"https://www.forsyth.k12.ga.us/calendar", "category":"schools", "source_type":"official", "kind":"school_calendar", "past_days":30, "future_days":120},
 ]
 REVIEW_TERMS = re.compile(r"\b(arrest|arrested|charged|shooting|death|dead|killed|missing|crash|fatal|victim|alleged|allegation|election|suicide|sexual assault|abuse)\b", re.I)
 WEATHER_STATIONS = [
@@ -384,8 +384,12 @@ def merge_publication(current: dict, queue: dict) -> dict:
     approved={x["id"]:x for x in queue.get("items",[]) if (x.get("approval_status")=="approved" or x.get("article_path")) and x.get("id") != "welcome-001"}
     items=sorted(approved.values(), key=lambda x:(x.get("event_date", x.get("date", "")), x.get("event_time", ""), x.get("title", "")), reverse=True)[:100]
     result=dict(current); result["items"]=items; result["updated_at"]=datetime.now(timezone.utc).isoformat()
-    if items:
-        lead = items[0]
+    # Future calendar events belong in “What to watch”, but must not become
+    # the homepage lead or crowd out current local updates in the main feed.
+    today = datetime.now(timezone.utc).date().isoformat()
+    current_items = [x for x in items if not x.get("event_date") or x.get("event_date") <= today]
+    lead = current_items[0] if current_items else (items[0] if items else None)
+    if lead:
         result["lead"]={"title":lead.get("title", "Latest Forsyth update"), "summary":lead.get("summary", "See the source for details."), "link":lead.get("link", "")}
     return result
 

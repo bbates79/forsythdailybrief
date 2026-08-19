@@ -86,6 +86,20 @@ def test_stale_approved_items_are_not_reintroduced():
     current={"items":[{"id":"stale","approval_status":"approved"}]}
     assert merge_publication(current,{"items":[]})["items"] == []
 
+def test_future_calendar_event_does_not_become_homepage_lead(monkeypatch):
+    import pipeline
+    class FakeDate:
+        @classmethod
+        def now(cls, tz=None):
+            from datetime import datetime, timezone
+            return datetime(2026, 8, 19, tzinfo=timezone.utc)
+    monkeypatch.setattr(pipeline, "datetime", FakeDate)
+    result = merge_publication({}, {"items":[
+        {"id":"future", "title":"Post Planning", "event_date":"2027-05-28", "approval_status":"approved"},
+        {"id":"current", "title":"County update", "date":"2026-08-18", "approval_status":"approved"},
+    ]})
+    assert result["lead"]["title"] == "County update"
+
 def test_school_category():
     item = normalize_item({"title":"School calendar update", "summary":"District schedule", "link":"https://example.test/d", "source":"Forsyth County Schools"}, "schools", source_type="official")
     assert item["category"] == "schools"
