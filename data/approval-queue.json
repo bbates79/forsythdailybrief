@@ -950,6 +950,24 @@
       "all_day": true
     },
     {
+      "id": "4bd5e0d0efe547a1",
+      "title": "All Grades (K-12) Early Release",
+      "summary": "District-wide event listed on the official Forsyth County Schools calendar.",
+      "source": "Forsyth County Schools Calendar",
+      "source_type": "official",
+      "category": "schools",
+      "date": "2026-12-18",
+      "link": "https://www.forsyth.k12.ga.us/calendar?fdb_event=774aec4c-af40-5a69-823f-3581ec78723e",
+      "approval_status": "approved",
+      "event_date": "2026-12-18",
+      "event_time": "All day",
+      "event_location": "",
+      "event_type": "School district calendar",
+      "calendar_link": "https://www.forsyth.k12.ga.us/calendar",
+      "calendar_uid": "774aec4c-af40-5a69-823f-3581ec78723e",
+      "all_day": true
+    },
+    {
       "id": "43474fb47a3ec4e4",
       "title": "Goodson Drug v. DEA: How a federal lawsuit has helped to keep the Cumming pharmacy open",
       "summary": "Goodson Drug Company sued the DEA in federal court after its administrative appeal with the administration seemingly hit a dead end.",
@@ -1022,5 +1040,5 @@
       "held"
     ]
   },
-  "updated_at": "2026-08-19T22:27:44.951592+00:00"
+  "updated_at": "2026-08-20T11:48:16.594059+00:00"
 }
