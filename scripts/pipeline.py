@@ -65,10 +65,15 @@ def reader_category(category: str, title: str, summary: str) -> str:
         if "event" in text or "festival" in text: return "events"
     return category
 
+def clean_feed_text(value: str, limit: int | None = None) -> str:
+    value = html.unescape(str(value or ""))
+    value = re.sub(r"<[^>]+>", " ", value)
+    value = re.sub(r"\s+", " ", value).strip()
+    return value[:limit] if limit else value
+
 def normalize_item(raw: dict, category: str, source_type: str = "official") -> dict:
-    title = html.unescape(re.sub(r"\s+", " ", raw.get("title", "")).strip())
-    summary = html.unescape(re.sub(r"<[^>]+>", " ", raw.get("summary", "")))
-    summary = re.sub(r"\s+", " ", summary).strip()[:500]
+    title = clean_feed_text(raw.get("title", ""))
+    summary = clean_feed_text(raw.get("summary", ""), 500)
     link = clean_url(raw.get("link", ""))
     category = reader_category(category, title, summary)
     status = classify(title, summary)
@@ -368,12 +373,23 @@ def collect() -> tuple[list[dict], list[str]]:
 
 def update_queue(items: list[dict]) -> dict:
     old = read_json(QUEUE)
-    fresh = {item["id"]: item for item in items}
-    # Retain a pending review item until it is explicitly approved or rejected;
-    # discard stale approved candidates from the current feed. Historical
-    # editions will later live in the archive, not the active queue.
+    previous = {item["id"]: item for item in old.get("items", [])}
+    fresh = {}
+    review_fields = {"approval_status", "reviewed_by", "reviewed_at", "review_reason", "article_path", "article_html_path", "article_markdown_path"}
+    for item in items:
+        prior = previous.get(item["id"])
+        if prior and (prior.get("reviewed_by") or prior.get("reviewed_at") or prior.get("approval_status") in {"rejected", "held"}):
+            merged = dict(item)
+            for key in review_fields:
+                if key in prior:
+                    merged[key] = prior[key]
+            fresh[item["id"]] = merged
+        else:
+            fresh[item["id"]] = item
+    # Retain pending review items and reviewed editorial records until explicitly
+    # resolved, even when a source temporarily omits them.
     for item in old.get("items", []):
-        if item.get("id") not in fresh and (item.get("approval_status") == "pending" or item.get("article_path")):
+        if item.get("id") not in fresh and (item.get("approval_status") in {"pending", "rejected", "held"} or item.get("article_path")):
             fresh[item["id"]] = item
     old["items"] = list(fresh.values())
     old["updated_at"] = datetime.now(timezone.utc).isoformat()
@@ -381,7 +397,7 @@ def update_queue(items: list[dict]) -> dict:
     return old
 
 def merge_publication(current: dict, queue: dict) -> dict:
-    approved={x["id"]:x for x in queue.get("items",[]) if (x.get("approval_status")=="approved" or x.get("article_path")) and x.get("id") != "welcome-001"}
+    approved={x["id"]:x for x in queue.get("items",[]) if x.get("approval_status")=="approved" and x.get("id") != "welcome-001"}
     items=sorted(approved.values(), key=lambda x:(x.get("event_date", x.get("date", "")), x.get("event_time", ""), x.get("title", "")), reverse=True)[:100]
     result=dict(current); result["items"]=items; result["updated_at"]=datetime.now(timezone.utc).isoformat()
     # Future calendar events belong in “What to watch”, but must not become

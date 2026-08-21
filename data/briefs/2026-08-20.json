@@ -2,25 +2,9 @@
   "schema_version": 1,
   "date": "2026-08-20",
   "status": "published",
-  "headline": "Board of Commissioners Regular Meeting / Public Hearings",
-  "intro": "Upcoming public meeting or hearing listed by Forsyth County.",
+  "headline": "Forsyth County Approves Precinct and Polling Place Changes",
+  "intro": "The Forsyth County Board of Voter Registrations & Elections and the Forsyth County Board of Commissioners have approved voting precinct line and polling place changes that will be effective with the November 2026 elections. The changes will impact ... The post Forsyth County Approves Precinct and Polling Place Changes appeared first on Forsyth County .",
   "what_to_watch": [
-    {
-      "id": "0472d5b2d942b609",
-      "title": "Board of Commissioners Regular Meeting / Public Hearings",
-      "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
-      "source": "Forsyth County Meetings",
-      "source_type": "official",
-      "category": "government",
-      "date": "2026-08-20",
-      "link": "https://www.forsythco.com/meetings/board-of-commissioners-regular-meeting-public-hearings-3",
-      "approval_status": "approved",
-      "event_date": "2026-08-20",
-      "event_time": "5:00 PM",
-      "event_location": "Board of Commissioners Building",
-      "event_type": "Regular Meeting/Public Hearings",
-      "calendar_link": "https://www.forsythco.com/juicebox-meetings/ical-export?meeting_id=17562"
-    },
     {
       "id": "fe3f14d86b5e6c46",
       "title": "Board of Commissioners Work Session Meeting",
@@ -134,6 +118,24 @@
       "calendar_link": "https://www.forsyth.k12.ga.us/calendar",
       "calendar_uid": "6152a93c-872e-5d80-9209-efd014af4512",
       "all_day": true
+    },
+    {
+      "id": "080fec5c5b0d7745",
+      "title": "Labor Day - Student/Staff Holidays",
+      "summary": "District-wide event listed on the official Forsyth County Schools calendar.",
+      "source": "Forsyth County Schools Calendar",
+      "source_type": "official",
+      "category": "schools",
+      "date": "2026-09-07",
+      "link": "https://www.forsyth.k12.ga.us/calendar?fdb_event=0e049c44-afab-580d-820f-d61472627ea7",
+      "approval_status": "approved",
+      "event_date": "2026-09-07",
+      "event_time": "All day",
+      "event_location": "",
+      "event_type": "School district calendar",
+      "calendar_link": "https://www.forsyth.k12.ga.us/calendar",
+      "calendar_uid": "0e049c44-afab-580d-820f-d61472627ea7",
+      "all_day": true
     }
   ],
   "recent_articles": [
@@ -148,7 +150,8 @@
       "link": "https://ga.healthinspections.us/georgia/history.cfm?id=13007732&inspID=57545038&county=Forsyth",
       "approval_status": "approved",
       "review_reason": "sensitive_public_health",
-      "article_path": "articles/friends-cumming-grill-gets-u-grade-2026-08-04.md",
+      "article_path": "articles/friends-cumming-grill-gets-u-grade-2026-08-04.html",
+      "article_markdown_path": "articles/friends-cumming-grill-gets-u-grade-2026-08-04.md",
       "inspection_score": 42,
       "inspection_grade": "U",
       "establishment": "Friends Cumming Grill",
@@ -178,12 +181,12 @@
   ],
   "latest": [],
   "snapshot": {
-    "weather_temperature_f": 72.3,
-    "weather_observed_at": "2026-08-20 07:48:27",
-    "lake_lanier_ft": 1066.25,
-    "lake_lanier_observed_at": "2026-08-20T07:15:00.000-04:00",
+    "weather_temperature_f": 79.0,
+    "weather_observed_at": "2026-08-20 22:52:42",
+    "lake_lanier_ft": 1066.22,
+    "lake_lanier_observed_at": "2026-08-20T22:15:00.000-04:00",
     "lake_lanier_provisional": true
   },
-  "generated_at": "2026-08-20T11:48:31.958303+00:00",
+  "generated_at": "2026-08-21T04:12:33.710088+00:00",
   "sources": []
 }

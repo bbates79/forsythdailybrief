@@ -72,6 +72,34 @@ def test_publication_excludes_unapproved_and_placeholder():
     assert {x["id"] for x in result["items"]} == {"old","new"}
     assert all(x["approval_status"]=="approved" for x in result["items"])
 
+def test_article_path_does_not_bypass_approval():
+    result = merge_publication({}, {"items":[{"id":"article","approval_status":"rejected","article_path":"articles/story.html"}]})
+    assert result["items"] == []
+
+def test_normalize_item_unescapes_then_strips_feed_markup():
+    item = normalize_item({"title":"Cumming man &lt;img src=x onerror=alert(1)&gt; charged", "summary":"&lt;b&gt;Details&lt;/b&gt;"}, "local-news")
+    assert "<img" not in item["title"]
+    assert item["title"] == "Cumming man charged"
+    assert item["summary"] == "Details"
+
+def test_rejection_survives_refresh_of_same_source_item():
+    import pipeline
+    old = {"items":[{"id":"same","title":"Old","approval_status":"rejected","reviewed_by":"owner","reviewed_at":"2026-08-20T00:00:00Z","review_reason":"manual rejection"}]}
+    path = pipeline.QUEUE
+    from tempfile import NamedTemporaryFile
+    with NamedTemporaryFile(mode="w+", suffix=".json") as handle:
+        json.dump(old, handle); handle.flush()
+        original = pipeline.QUEUE
+        pipeline.QUEUE = Path(handle.name)
+        try:
+            result = pipeline.update_queue([{"id":"same","title":"Fresh","approval_status":"approved"}])
+        finally:
+            pipeline.QUEUE = original
+    item = result["items"][0]
+    assert item["title"] == "Fresh"
+    assert item["approval_status"] == "rejected"
+    assert item["reviewed_by"] == "owner"
+
 def test_data_files_are_valid_json():
     root = Path(__file__).parents[1]
     for path in [root / "data/current.json", root / "data/approval-queue.json"]:
