@@ -133,22 +133,6 @@
       "approval_status": "approved"
     },
     {
-      "id": "0472d5b2d942b609",
-      "title": "Board of Commissioners Regular Meeting / Public Hearings",
-      "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
-      "source": "Forsyth County Meetings",
-      "source_type": "official",
-      "category": "government",
-      "date": "2026-08-20",
-      "link": "https://www.forsythco.com/meetings/board-of-commissioners-regular-meeting-public-hearings-3",
-      "approval_status": "approved",
-      "event_date": "2026-08-20",
-      "event_time": "5:00 PM",
-      "event_location": "Board of Commissioners Building",
-      "event_type": "Regular Meeting/Public Hearings",
-      "calendar_link": "https://www.forsythco.com/juicebox-meetings/ical-export?meeting_id=17562"
-    },
-    {
       "id": "fe3f14d86b5e6c46",
       "title": "Board of Commissioners Work Session Meeting",
       "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
@@ -291,6 +275,22 @@
       "event_location": "Board of Commissioners Building",
       "event_type": "Regular Meeting/Public Hearings",
       "calendar_link": "https://www.forsythco.com/juicebox-meetings/ical-export?meeting_id=17568"
+    },
+    {
+      "id": "ee5dbf2d74b540b9",
+      "title": "Board of Commissioners Work Session Meeting",
+      "summary": "Upcoming public meeting or hearing listed by Forsyth County.",
+      "source": "Forsyth County Meetings",
+      "source_type": "official",
+      "category": "government",
+      "date": "2026-09-22",
+      "link": "https://www.forsythco.com/meetings/board-of-commissioners-work-session-meeting-6",
+      "approval_status": "approved",
+      "event_date": "2026-09-22",
+      "event_time": "2:00 PM",
+      "event_location": "Board of Commissioners Building",
+      "event_type": "Work Session",
+      "calendar_link": "https://www.forsythco.com/juicebox-meetings/ical-export?meeting_id=17569"
     },
     {
       "id": "3953c871bf4e46fb",
@@ -534,24 +534,6 @@
       "date": "2026-07-31",
       "link": "https://www.forsyth.k12.ga.us/district-services/communications/press-release?fdb_post=6814",
       "approval_status": "approved"
-    },
-    {
-      "id": "34a212e80a177679",
-      "title": "Board of Education Meeting",
-      "summary": "District-wide event listed on the official Forsyth County Schools calendar.",
-      "source": "Forsyth County Schools Calendar",
-      "source_type": "official",
-      "category": "schools",
-      "date": "2026-07-21",
-      "link": "https://www.forsyth.k12.ga.us/calendar?fdb_event=8ea8d4ba-f970-57a5-8e05-b43110cf01b1",
-      "approval_status": "approved",
-      "event_date": "2026-07-21",
-      "event_time": "5:00 PM–6:00 PM",
-      "event_location": "Forsyth County Board of Education (1120 Dahlonega Hwy, Cumming, GA, United States)",
-      "event_type": "School district calendar",
-      "calendar_link": "https://www.forsyth.k12.ga.us/calendar",
-      "calendar_uid": "8ea8d4ba-f970-57a5-8e05-b43110cf01b1",
-      "all_day": false
     },
     {
       "id": "4cc3928fb0b19f18",
@@ -1041,5 +1023,5 @@
       "held"
     ]
   },
-  "updated_at": "2026-08-20T11:48:16.594059+00:00"
+  "updated_at": "2026-08-21T02:32:41.848400+00:00"
 }
