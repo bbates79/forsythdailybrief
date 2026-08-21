@@ -57,7 +57,7 @@ def generate(day: str):
     editions = []
     if index_path.exists():
         editions = json.loads(index_path.read_text()).get("editions", [])
-    entry = {"date": day, "path": edition_filename(day), "headline": edition["headline"], "item_count": len(edition["latest"]), "source_count": len(edition["sources"])}
+    entry = {"date": day, "path": edition_filename(day), "headline": edition["headline"], "item_count": len(edition["latest"]) + len(edition["what_to_watch"]) + len(edition["recent_articles"]), "source_count": len({x.get("source", "") for x in edition["latest"] + edition["what_to_watch"] + edition["recent_articles"] if x.get("source")})}
     editions = [x for x in editions if x.get("date") != day]
     editions.insert(0, entry)
     index_path.write_text(json.dumps({"schema_version": 1, "editions": editions[:90]}, indent=2, ensure_ascii=False) + "\n")

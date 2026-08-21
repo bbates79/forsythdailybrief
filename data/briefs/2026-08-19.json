@@ -2,8 +2,8 @@
   "schema_version": 1,
   "date": "2026-08-19",
   "status": "published",
-  "headline": "Forsyth County Approves Precinct and Polling Place Changes",
-  "intro": "The Forsyth County Board of Voter Registrations & Elections and the Forsyth County Board of Commissioners have approved voting precinct line and polling place changes that will be effective with the November 2026 elections. The changes will impact ... The post Forsyth County Approves Precinct and Polling Place Changes appeared first on Forsyth County .",
+  "headline": "Board of Commissioners Regular Meeting / Public Hearings",
+  "intro": "Upcoming public meeting or hearing listed by Forsyth County.",
   "what_to_watch": [
     {
       "id": "0472d5b2d942b609",
@@ -148,7 +148,8 @@
       "link": "https://ga.healthinspections.us/georgia/history.cfm?id=13007732&inspID=57545038&county=Forsyth",
       "approval_status": "approved",
       "review_reason": "sensitive_public_health",
-      "article_path": "articles/friends-cumming-grill-gets-u-grade-2026-08-04.md",
+      "article_path": "articles/friends-cumming-grill-gets-u-grade-2026-08-04.html",
+      "article_markdown_path": "articles/friends-cumming-grill-gets-u-grade-2026-08-04.md",
       "inspection_score": 42,
       "inspection_grade": "U",
       "establishment": "Friends Cumming Grill",
@@ -178,12 +179,12 @@
   ],
   "latest": [],
   "snapshot": {
-    "weather_temperature_f": 89.1,
-    "weather_observed_at": "2026-08-19 18:27:43",
-    "lake_lanier_ft": 1066.27,
-    "lake_lanier_observed_at": "2026-08-19T18:15:00.000-04:00",
+    "weather_temperature_f": 72.3,
+    "weather_observed_at": "2026-08-20 07:48:27",
+    "lake_lanier_ft": 1066.25,
+    "lake_lanier_observed_at": "2026-08-20T07:15:00.000-04:00",
     "lake_lanier_provisional": true
   },
-  "generated_at": "2026-08-19T22:27:45.788732+00:00",
+  "generated_at": "2026-08-21T01:25:13.748681+00:00",
   "sources": []
 }

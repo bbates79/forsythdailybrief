@@ -2,16 +2,16 @@
   "schema_version": 1,
   "editions": [
     {
+      "date": "2026-08-19",
+      "path": "briefs/2026-08-19.html",
+      "headline": "Board of Commissioners Regular Meeting / Public Hearings",
+      "item_count": 10,
+      "source_count": 4
+    },
+    {
       "date": "2026-08-20",
       "path": "briefs/2026-08-20.html",
       "headline": "Board of Commissioners Regular Meeting / Public Hearings",
-      "item_count": 0,
-      "source_count": 0
-    },
-    {
-      "date": "2026-08-19",
-      "path": "briefs/2026-08-19.html",
-      "headline": "Forsyth County Approves Precinct and Polling Place Changes",
       "item_count": 0,
       "source_count": 0
     },
