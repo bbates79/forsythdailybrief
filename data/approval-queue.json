@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "4a739ae065994dd2",
+      "title": "Forsyth County Board of Commissioners Proclaims August 29 as Pet Neglect Prevention Day",
+      "summary": "The Forsyth County Board of Commissioners proclaimed Aug. 29, 2026, as Pet Neglect Prevention Day during its regular meeting on Aug. 20, recognizing the importance of safe and stable homes for animals and prevention of unnecessary suffering of ... The post Forsyth County Board of Commissioners Proclaims August 29 as Pet Neglect Prevention Day appeared first on Forsyth County .",
+      "source": "Forsyth County Government",
+      "source_type": "official",
+      "category": "government",
+      "date": "2026-08-21",
+      "link": "https://www.forsythco.com/news/2026/08/forsyth-county-board-of-commissioners-proclaims-august-29-as-pet-neglect-prevention-day",
+      "approval_status": "approved"
+    },
+    {
       "id": "2a9c39dd85adca15",
       "title": "Forsyth County Approves Precinct and Polling Place Changes",
       "summary": "The Forsyth County Board of Voter Registrations & Elections and the Forsyth County Board of Commissioners have approved voting precinct line and polling place changes that will be effective with the November 2026 elections. The changes will impact ... The post Forsyth County Approves Precinct and Polling Place Changes appeared first on Forsyth County .",
@@ -97,17 +108,6 @@
       "category": "government",
       "date": "2026-08-06",
       "link": "https://www.forsythco.com/news/2026/08/flags-to-fly-at-half-staff-in-honor-of-1st-lt-tyler-james-feehan",
-      "approval_status": "approved"
-    },
-    {
-      "id": "078b0dda22551d87",
-      "title": "How the County Plans Its Budget",
-      "summary": "How does the County budget annually for our public safety needs, road improvements, new parks, trails, library programs, water infrastructure and the services needed to make Forsyth County our home? Chief Financial Officer Brian Clark joins the FoCo ... The post How the County Plans Its Budget appeared first on Forsyth County .",
-      "source": "Forsyth County Government",
-      "source_type": "official",
-      "category": "government",
-      "date": "2026-08-06",
-      "link": "https://www.forsythco.com/news/2026/08/budget-planning",
       "approval_status": "approved"
     },
     {
@@ -1023,5 +1023,5 @@
       "held"
     ]
   },
-  "updated_at": "2026-08-21T11:48:17.187678+00:00"
+  "updated_at": "2026-08-22T10:51:35.799678+00:00"
 }
